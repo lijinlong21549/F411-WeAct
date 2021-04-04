@@ -1,0 +1,26 @@
+--cpu=Cortex-M4.fp.sp
+"gpio_iotoggle\startup_stm32f411xe.o"
+"gpio_iotoggle\main.o"
+"gpio_iotoggle\gpio.o"
+"gpio_iotoggle\stm32f4xx_it.o"
+"gpio_iotoggle\stm32f4xx_hal_msp.o"
+"gpio_iotoggle\stm32f4xx_hal_tim.o"
+"gpio_iotoggle\stm32f4xx_hal_tim_ex.o"
+"gpio_iotoggle\stm32f4xx_hal_rcc.o"
+"gpio_iotoggle\stm32f4xx_hal_rcc_ex.o"
+"gpio_iotoggle\stm32f4xx_hal_flash.o"
+"gpio_iotoggle\stm32f4xx_hal_flash_ex.o"
+"gpio_iotoggle\stm32f4xx_hal_flash_ramfunc.o"
+"gpio_iotoggle\stm32f4xx_hal_gpio.o"
+"gpio_iotoggle\stm32f4xx_hal_dma_ex.o"
+"gpio_iotoggle\stm32f4xx_hal_dma.o"
+"gpio_iotoggle\stm32f4xx_hal_pwr.o"
+"gpio_iotoggle\stm32f4xx_hal_pwr_ex.o"
+"gpio_iotoggle\stm32f4xx_hal_cortex.o"
+"gpio_iotoggle\stm32f4xx_hal.o"
+"gpio_iotoggle\stm32f4xx_hal_exti.o"
+"gpio_iotoggle\system_stm32f4xx.o"
+--library_type=microlib --strict --scatter "GPIO_IOToggle\GPIO_IOToggle.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "GPIO_IOToggle.map" -o GPIO_IOToggle\GPIO_IOToggle.axf

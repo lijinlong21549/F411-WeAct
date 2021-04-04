@@ -1,0 +1,22 @@
+CMSIS_AGDI.DLL - CMSIS-DAP Driver Log
+
+20:44:44:781 (13/01/2021) - START SEQUENCE "InitTarget", "default" - ID 0
+20:44:44:781 (13/01/2021) - START SEQUENCE "InitInternals", "default" - ID 1
+20:44:44:781 (13/01/2021) - START SEQUENCE "InitDriver", "default" - ID 2
+20:44:44:781 (13/01/2021) - END SEQUENCE "InitDriver", "success" - ID 3
+20:44:44:781 (13/01/2021) - START SEQUENCE "InitDebugger", "default" - ID 4
+20:44:44:827 (13/01/2021) - END SEQUENCE "InitDebugger", "success" - ID 5
+20:44:44:827 (13/01/2021) - END SEQUENCE "InitInternals", "success" - ID 6
+20:44:44:827 (13/01/2021) - START SEQUENCE "DebugPortSetup", "default" - ID 7
+20:44:44:858 (13/01/2021) - END SEQUENCE "DebugPortSetup", "failed" - ID 8
+20:45:15:320 (13/01/2021) - END SEQUENCE "InitTarget", "failed" - ID 9
+20:45:15:320 (13/01/2021) - START SEQUENCE "StopTarget", "default" - ID 10
+  20:45:15:322 (13/01/2021) - READ  AP  Access, AP 0x00000000, Addr 0x000000FC, Val 0xFFFFFFFF, "SWD Read AP - FAILED" - ID 0
+20:45:15:322 (13/01/2021) - WRITE MEM BLOCK Access, AP 0x00000000, Start Addr 0x00000000, End Addr 0x00000007, "DAP Write Memory Block - FAILED" - ID 1
+20:45:15:322 (13/01/2021) - START SEQUENCE "_UnInitTrace", "default" - ID 11
+20:45:15:322 (13/01/2021) - END SEQUENCE "_UnInitTrace", "success" - ID 12
+20:45:15:322 (13/01/2021) - START SEQUENCE "UnInitDebugger", "default" - ID 13
+20:45:15:324 (13/01/2021) - END SEQUENCE "UnInitDebugger", "success" - ID 14
+20:45:15:324 (13/01/2021) - START SEQUENCE "_UnInitDriver", "default" - ID 15
+20:45:15:324 (13/01/2021) - END SEQUENCE "_UnInitDriver", "success" - ID 16
+20:45:15:324 (13/01/2021) - END SEQUENCE "StopTarget", "success" - ID 17
