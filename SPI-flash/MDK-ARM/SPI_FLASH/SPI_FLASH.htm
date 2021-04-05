@@ -3,7 +3,7 @@
 <title>Static Call Graph - [SPI_FLASH\SPI_FLASH.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image SPI_FLASH\SPI_FLASH.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Apr 04 20:58:59 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Apr 05 17:55:29 2021
 <BR><P>
 <H3>Maximum Stack Usage =        232 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -384,8 +384,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
-<BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_WriteEnable
+<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_WriteEnable
+<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[5f]"></a>HAL_GPIO_Init</STRONG> (Thumb, 370 bytes, Stack size 40 bytes, stm32f4xx_hal_gpio.o(i.HAL_GPIO_Init))
@@ -397,25 +397,25 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[6b]"></a>HAL_GPIO_WritePin</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f4xx_hal_gpio.o(i.HAL_GPIO_WritePin))
-<BR><BR>[Called By]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_WriteEnable
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Write
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_WriteEnable
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Read_ID
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_GetStatus
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Write
 <LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Read
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Init
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_GetStatus
+<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
 </UL>
 
 <P><STRONG><a name="[51]"></a>HAL_GetTick</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f4xx_hal.o(i.HAL_GetTick))
 <BR><BR>[Called By]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_WaitFlagStateUntilTimeout
-<LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit
-<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_OscConfig
-<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_ClockConfig
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_Transmit
 <LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_Receive
-<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_WriteEnable
+<LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Write
+<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_OscConfig
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_ClockConfig
+<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_TransmitReceive
 <LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_WaitOnFlagUntilTimeout
 </UL>
@@ -521,8 +521,8 @@ Global Symbols
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_TransmitReceive
 </UL>
 <BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Read_ID
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Read
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_GetStatus
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Read
 </UL>
 
 <P><STRONG><a name="[63]"></a>HAL_SPI_Transmit</STRONG> (Thumb, 348 bytes, Stack size 40 bytes, stm32f4xx_hal_spi.o(i.HAL_SPI_Transmit))
@@ -532,11 +532,11 @@ Global Symbols
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_WriteEnable
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Write
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Read_ID
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_GetStatus
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Write
 <LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Read
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Init
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_GetStatus
 </UL>
 
 <P><STRONG><a name="[61]"></a>HAL_SPI_TransmitReceive</STRONG> (Thumb, 482 bytes, Stack size 40 bytes, stm32f4xx_hal_spi.o(i.HAL_SPI_TransmitReceive))
@@ -593,8 +593,8 @@ Global Symbols
 <P><STRONG><a name="[6a]"></a>MX_GPIO_Init</STRONG> (Thumb, 146 bytes, Stack size 48 bytes, gpio.o(i.MX_GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = MX_GPIO_Init &rArr; HAL_GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
-<LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<BR>[Calls]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_Init
 <LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -663,7 +663,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f411xe.o(RESET)
 </UL>
-<P><STRONG><a name="[75]"></a>W25Qx_Get_Parameter</STRONG> (Thumb, 96 bytes, Stack size 16 bytes, w25q16.o(i.W25Qx_Get_Parameter))
+<P><STRONG><a name="[75]"></a>W25Qx_Get_Parameter</STRONG> (Thumb, 96 bytes, Stack size 16 bytes, w25q64.o(i.W25Qx_Get_Parameter))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = W25Qx_Get_Parameter &rArr; W25Qx_Read_ID &rArr; HAL_SPI_Receive &rArr; HAL_SPI_TransmitReceive &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Read_ID
@@ -672,17 +672,17 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Init
 </UL>
 
-<P><STRONG><a name="[78]"></a>W25Qx_Init</STRONG> (Thumb, 54 bytes, Stack size 16 bytes, w25q16.o(i.W25Qx_Init))
+<P><STRONG><a name="[78]"></a>W25Qx_Init</STRONG> (Thumb, 54 bytes, Stack size 16 bytes, w25q64.o(i.W25Qx_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 176<LI>Call Chain = W25Qx_Init &rArr; W25Qx_Get_Parameter &rArr; W25Qx_Read_ID &rArr; HAL_SPI_Receive &rArr; HAL_SPI_TransmitReceive &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_Transmit
-<LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Get_Parameter
+<LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 </UL>
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[79]"></a>W25Qx_Read</STRONG> (Thumb, 88 bytes, Stack size 24 bytes, w25q16.o(i.W25Qx_Read))
+<P><STRONG><a name="[79]"></a>W25Qx_Read</STRONG> (Thumb, 88 bytes, Stack size 24 bytes, w25q64.o(i.W25Qx_Read))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = W25Qx_Read &rArr; HAL_SPI_Receive &rArr; HAL_SPI_TransmitReceive &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_Transmit
@@ -692,7 +692,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[76]"></a>W25Qx_Read_ID</STRONG> (Thumb, 112 bytes, Stack size 24 bytes, w25q16.o(i.W25Qx_Read_ID))
+<P><STRONG><a name="[76]"></a>W25Qx_Read_ID</STRONG> (Thumb, 112 bytes, Stack size 24 bytes, w25q64.o(i.W25Qx_Read_ID))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = W25Qx_Read_ID &rArr; HAL_SPI_Receive &rArr; HAL_SPI_TransmitReceive &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_Transmit
@@ -703,26 +703,26 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Get_Parameter
 </UL>
 
-<P><STRONG><a name="[7b]"></a>W25Qx_Write</STRONG> (Thumb, 184 bytes, Stack size 40 bytes, w25q16.o(i.W25Qx_Write))
+<P><STRONG><a name="[7b]"></a>W25Qx_Write</STRONG> (Thumb, 184 bytes, Stack size 40 bytes, w25q64.o(i.W25Qx_Write))
 <BR><BR>[Stack]<UL><LI>Max Depth = 208<LI>Call Chain = W25Qx_Write &rArr; W25Qx_WriteEnable &rArr; W25Qx_GetStatus &rArr; HAL_SPI_Receive &rArr; HAL_SPI_TransmitReceive &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_Transmit
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
-<LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_WriteEnable
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_GetStatus
+<LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 </UL>
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[7c]"></a>W25Qx_WriteEnable</STRONG> (Thumb, 88 bytes, Stack size 24 bytes, w25q16.o(i.W25Qx_WriteEnable))
+<P><STRONG><a name="[7c]"></a>W25Qx_WriteEnable</STRONG> (Thumb, 88 bytes, Stack size 24 bytes, w25q64.o(i.W25Qx_WriteEnable))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = W25Qx_WriteEnable &rArr; W25Qx_GetStatus &rArr; HAL_SPI_Receive &rArr; HAL_SPI_TransmitReceive &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_Transmit
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_GetStatus
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_GetStatus
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Write
 </UL>
@@ -736,8 +736,8 @@ Global Symbols
 <P><STRONG><a name="[7a]"></a>__2printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf5.o(i.__0printf$5))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Read_ID
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Read_ID
+<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[82]"></a>__ARM_fpclassifyf</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, fpclassifyf.o(i.__ARM_fpclassifyf))
@@ -801,15 +801,15 @@ Global Symbols
 <P><STRONG><a name="[43]"></a>main</STRONG> (Thumb, 102 bytes, Stack size 24 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 232<LI>Call Chain = main &rArr; W25Qx_Write &rArr; W25Qx_WriteEnable &rArr; W25Qx_GetStatus &rArr; HAL_SPI_Receive &rArr; HAL_SPI_TransmitReceive &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
-<BR>[Calls]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART1_UART_Init
+<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Write
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Read
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Init
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART1_UART_Init
 <LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_SPI1_Init
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
 <LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
-<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Write
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Read
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;W25Qx_Init
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
 <LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
@@ -817,7 +817,7 @@ Global Symbols
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[74]"></a>W25Qx_GetStatus</STRONG> (Thumb, 70 bytes, Stack size 24 bytes, w25q16.o(i.W25Qx_GetStatus))
+<P><STRONG><a name="[74]"></a>W25Qx_GetStatus</STRONG> (Thumb, 70 bytes, Stack size 24 bytes, w25q64.o(i.W25Qx_GetStatus))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = W25Qx_GetStatus &rArr; HAL_SPI_Receive &rArr; HAL_SPI_TransmitReceive &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_Transmit

@@ -1,24 +1,5 @@
-/**
-  ******************************************************************************
-  * @file    usart.h
-  * @brief   This file contains all the function prototypes for
-  *          the usart.c file
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  */
-/* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __W25Q16_H__
-#define __W25Q16_H__
+#ifndef __W25Q64_H__
+#define __W25Q64_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -28,7 +9,7 @@ extern "C" {
 #include "main.h"
 
 #include "stdio.h"
-#include "W25Q16.h"
+#include "W25Q64.h"
 
 #define delay(ms) osDelay(ms)
 #define get_tick() HAL_GetTick()
@@ -363,4 +344,4 @@ uint8_t W25Qx_Erase_Chip(void)
 }
 #endif
 
-#endif /* __W25Q16_H__ */
+#endif /* __W25Q64_H__ */

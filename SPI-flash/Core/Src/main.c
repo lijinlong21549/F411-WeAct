@@ -25,7 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "W25Q16.h"
+#include "W25Q64.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -96,9 +96,9 @@ int main(void)
 	W25Qx_Init();
 	printf("初始化SPI flash成功 \r\n");
 
-	printf("存储数据：W25Q16 \r\n");
+	printf("存储数据：W25Q64 \r\n");
 	
-	uint8_t DATA[6]="W25Q16";
+	uint8_t DATA[6]="W25Q64";
 	uint8_t pDATA[6];
 
 	W25Qx_Write(DATA,0*00, 6);
