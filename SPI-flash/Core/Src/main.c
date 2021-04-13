@@ -90,7 +90,7 @@ int main(void)
   MX_SPI1_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-
+	
 	HAL_Delay(10);
 	printf("开始初始化SPI flash \r\n");
 	W25Qx_Init();
