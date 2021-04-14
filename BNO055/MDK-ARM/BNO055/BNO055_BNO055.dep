@@ -1,7 +1,7 @@
 Dependencies for Project 'BNO055', Target 'BNO055': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
 F (startup_stm32f411xe.s)(0x607542EA)(--cpu Cortex-M4.fp.sp -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_BNO055-IE:\Keil5pack\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IE:\Keil5pack\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include--pd "__UVISION_VERSION SETA 529" --pd "_RTE_ SETA 1" --pd "STM32F411xE SETA 1"--list startup_stm32f411xe.lst --xref -o bno055\startup_stm32f411xe.o --depend bno055\startup_stm32f411xe.d)
-F (../Core/Src/main.c)(0x6075447E)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BNO055-IE:\Keil5pack\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IE:\Keil5pack\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F411xE -DUSE_HAL_DRIVER -DSTM32F411xE-o bno055\main.o --omf_browse bno055\main.crf --depend bno055\main.d)
+F (../Core/Src/main.c)(0x60758E21)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BNO055-IE:\Keil5pack\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IE:\Keil5pack\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F411xE -DUSE_HAL_DRIVER -DSTM32F411xE-o bno055\main.o --omf_browse bno055\main.crf --depend bno055\main.d)
 I (../Core/Inc/main.h)(0x607542D2)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6002E54F)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x607542D1)
@@ -41,6 +41,7 @@ I (../Core/Inc/usart.h)(0x607542CD)
 I (../Core/Inc/gpio.h)(0x607542CA)
 I (../Core/Inc/W25Q64.h)(0x6069BC47)
 I (../Core/Src/oled.h)(0x606AC8AB)
+I (../Core/Inc/BNO055.h)(0x60758E21)
 F (../Core/Src/gpio.c)(0x607542C9)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BNO055-IE:\Keil5pack\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IE:\Keil5pack\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F411xE -DUSE_HAL_DRIVER -DSTM32F411xE-o bno055\gpio.o --omf_browse bno055\gpio.crf --depend bno055\gpio.d)
 I (../Core/Inc/gpio.h)(0x607542CA)
 I (../Core/Inc/main.h)(0x607542D2)
@@ -76,7 +77,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x6002E54F)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x6002E54F)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6002E54F)
 I (E:\Keil5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
-F (../Core/Src/i2c.c)(0x607542CA)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BNO055-IE:\Keil5pack\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IE:\Keil5pack\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F411xE -DUSE_HAL_DRIVER -DSTM32F411xE-o bno055\i2c.o --omf_browse bno055\i2c.crf --depend bno055\i2c.d)
+F (../Core/Src/i2c.c)(0x607567A4)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BNO055-IE:\Keil5pack\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IE:\Keil5pack\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F411xE -DUSE_HAL_DRIVER -DSTM32F411xE-o bno055\i2c.o --omf_browse bno055\i2c.crf --depend bno055\i2c.d)
 I (../Core/Inc/i2c.h)(0x607542CB)
 I (../Core/Inc/main.h)(0x607542D2)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6002E54F)
@@ -287,7 +288,7 @@ I (E:\Keil5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
 I (../Core/Inc/W25Q64.h)(0x6069BC47)
 I (../Core/Inc/spi.h)(0x607542CC)
 I (E:\Keil5\ARM\ARMCC\include\math.h)(0x5D9AD212)
-F (..\Core\Src\oled.c)(0x60754413)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BNO055-IE:\Keil5pack\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IE:\Keil5pack\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F411xE -DUSE_HAL_DRIVER -DSTM32F411xE-o bno055\oled.o --omf_browse bno055\oled.crf --depend bno055\oled.d)
+F (..\Core\Src\oled.c)(0x607567A4)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BNO055-IE:\Keil5pack\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IE:\Keil5pack\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F411xE -DUSE_HAL_DRIVER -DSTM32F411xE-o bno055\oled.o --omf_browse bno055\oled.crf --depend bno055\oled.d)
 I (..\Core\Src\oled.h)(0x606AC8AB)
 I (../Core/Inc/i2c.h)(0x607542CB)
 I (../Core/Inc/main.h)(0x607542D2)
@@ -324,6 +325,42 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x6002E54F)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6002E54F)
 I (E:\Keil5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
 I (..\Core\Src\oledfont.h)(0x606AC8CC)
+F (..\Core\Src\BNO055.c)(0x60759BA2)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BNO055-IE:\Keil5pack\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IE:\Keil5pack\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F411xE -DUSE_HAL_DRIVER -DSTM32F411xE-o bno055\bno055.o --omf_browse bno055\bno055.crf --depend bno055\bno055.d)
+I (../Core/Inc/main.h)(0x607542D2)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6002E54F)
+I (../Core/Inc/stm32f4xx_hal_conf.h)(0x607542D1)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x6002E54F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x6002E54F)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x6002E518)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h)(0x6002E518)
+I (../Drivers/CMSIS/Include/core_cm4.h)(0x6002E51D)
+I (E:\Keil5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
+I (../Drivers/CMSIS/Include/cmsis_version.h)(0x6002E51D)
+I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x6002E51D)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x6002E51D)
+I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x6002E51D)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x6002E518)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x6002E54F)
+I (E:\Keil5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x6002E54F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x6002E54F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x6002E54F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x6002E54F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x6002E54F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x6002E54F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x6002E54F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x6002E54F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x6002E54F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x6002E54F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h)(0x6002E54F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h)(0x6002E54F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x6002E54F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x6002E54F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x6002E54F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6002E54F)
+I (E:\Keil5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
+I (../Core/Inc/BNO055.h)(0x60758E21)
+I (../Core/Inc/I2C.h)(0x607542CB)
 F (../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c)(0x6002E54F)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BNO055-IE:\Keil5pack\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IE:\Keil5pack\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32F411xE -DUSE_HAL_DRIVER -DSTM32F411xE-o bno055\stm32f4xx_hal_i2c.o --omf_browse bno055\stm32f4xx_hal_i2c.crf --depend bno055\stm32f4xx_hal_i2c.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6002E54F)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x607542D1)

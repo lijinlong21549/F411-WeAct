@@ -28,6 +28,7 @@
 /* USER CODE BEGIN Includes */
 #include "W25Q64.h"
 #include "oled.h"
+#include "BNO055.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -112,6 +113,9 @@ int main(void)
 	printf("取出数据：");
 	W25Qx_Read(pDATA,0*00,6);
 	printf("%s\r\n",pDATA);
+
+
+	BNO055_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */

@@ -437,6 +437,11 @@
               <FileType>1</FileType>
               <FilePath>..\Core\Src\oled.c</FilePath>
             </File>
+            <File>
+              <FileName>BNO055.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\BNO055.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
