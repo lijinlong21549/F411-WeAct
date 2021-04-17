@@ -340,6 +340,23 @@ uint8_t W25Qx_Erase_Chip(void)
 	return W25Qx_OK;
 }
 
+void	W25Qx_test(void)
+{
+	printf("存储数据：W25Q64 \r\n");
+	
+	uint8_t DATA[6]="W25Q64";
+	uint8_t pDATA[6];
+
+	W25Qx_Write(DATA,0*00, 6);
+
+	//W25Qx_Erase_Block(0*00);
+
+	printf("取出数据：");
+	W25Qx_Read(pDATA,0*00,6);
+	printf("%s\r\n",pDATA);
+	
+}
+
 #ifdef __cplusplus
 }
 #endif

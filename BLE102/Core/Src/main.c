@@ -19,6 +19,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "dma.h"
 #include "spi.h"
 #include "usart.h"
 #include "gpio.h"
@@ -26,6 +27,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "W25Q64.h"
+#include "BLE102.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -50,6 +52,7 @@
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+static void MX_NVIC_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -87,28 +90,22 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_SPI1_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
+
+  /* Initialize interrupts */
+  MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
 	
 	HAL_Delay(10);
 	printf("开始初始化SPI flash \r\n");
 	W25Qx_Init();
 	printf("初始化SPI flash成功 \r\n");
+	W25Qx_test();
 
-	printf("存储数据：W25Q64 \r\n");
-	
-	uint8_t DATA[6]="W25Q64";
-	uint8_t pDATA[6];
-
-	W25Qx_Write(DATA,0*00, 6);
-
-	//W25Qx_Erase_Block(0*00);
-
-	printf("取出数据：");
-	W25Qx_Read(pDATA,0*00,6);
-	printf("%s\r\n",pDATA);
+	BLE102_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -118,7 +115,16 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		HAL_Delay(50);
+		/*
+		if(UART1_Rx_flg)
+    {
+      HAL_UART_Transmit(&huart1,UART1_Rx_Buf,UART1_Rx_cnt,0x10);    //发送接收到的数据
+      for(int i = 0;i<UART1_Rx_cnt;i++)
+        UART1_Rx_Buf[i] = 0;
+      UART1_Rx_cnt = 0;
+      UART1_Rx_flg = 0;
+    } 
+		*/
   }
   /* USER CODE END 3 */
 }
@@ -165,6 +171,26 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief NVIC Configuration.
+  * @retval None
+  */
+static void MX_NVIC_Init(void)
+{
+  /* DMA1_Stream5_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream5_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
+  /* DMA1_Stream6_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream6_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream6_IRQn);
+  /* USART1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(USART1_IRQn, 1, 0);
+  HAL_NVIC_EnableIRQ(USART1_IRQn);
+  /* USART2_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(USART2_IRQn, 6, 0);
+  HAL_NVIC_EnableIRQ(USART2_IRQn);
 }
 
 /* USER CODE BEGIN 4 */
