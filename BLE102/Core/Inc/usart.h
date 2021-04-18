@@ -34,10 +34,10 @@ extern "C" {
 #define MAX_REC_LENGTH  1024 
 
 /*串口2中断变量*/
-extern unsigned char UART2_Rx_Buf[MAX_REC_LENGTH];
-extern unsigned char UART2_Rx_flg ;
+extern uint8_t UART2_Rx_Buf[MAX_REC_LENGTH];
+extern uint8_t UART2_Rx_flg ;
 extern unsigned int  UART2_Rx_cnt ;
-extern unsigned char UART2_temp[REC_LENGTH];
+extern uint8_t UART2_temp[REC_LENGTH];
 
 /* USER CODE END Includes */
 
@@ -45,7 +45,7 @@ extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN Private defines */
-
+void UART2_INT_REST();
 /* USER CODE END Private defines */
 
 void MX_USART1_UART_Init(void);

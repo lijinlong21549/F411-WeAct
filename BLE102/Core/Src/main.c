@@ -103,7 +103,7 @@ int main(void)
 	printf("开始初始化SPI flash \r\n");
 	W25Qx_Init();
 	printf("初始化SPI flash成功 \r\n");
-	W25Qx_test();
+	//W25Qx_test();
 
 	BLE102_Init();
   /* USER CODE END 2 */
@@ -115,16 +115,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		/*
-		if(UART1_Rx_flg)
-    {
-      HAL_UART_Transmit(&huart1,UART1_Rx_Buf,UART1_Rx_cnt,0x10);    //发送接收到的数据
-      for(int i = 0;i<UART1_Rx_cnt;i++)
-        UART1_Rx_Buf[i] = 0;
-      UART1_Rx_cnt = 0;
-      UART1_Rx_flg = 0;
-    } 
-		*/
   }
   /* USER CODE END 3 */
 }

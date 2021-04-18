@@ -25,13 +25,17 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
+
 #include "main.h"
 #include "stdio.h"
 
+
+
 extern unsigned char BLE102_AT_command_MODE;
 
-void BLE102_Init(void);
 
+
+void BLE102_Init(void);
 
 
 

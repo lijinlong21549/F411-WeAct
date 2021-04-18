@@ -24,11 +24,21 @@
 #include "BLE102.h"
 
 /*串口2中断变量*/
-unsigned char UART2_Rx_Buf[MAX_REC_LENGTH] = {0}; //USART1存储接收数据
-unsigned char UART2_Rx_flg = 0;                   //USART1接收完成标志
+uint8_t UART2_Rx_Buf[MAX_REC_LENGTH] = {0}; //USART1存储接收数据
+uint8_t UART2_Rx_flg = 0;                   //USART1接收完成标志
 unsigned int  UART2_Rx_cnt = 0;                   //USART1接受数据计数器
-unsigned char UART2_temp[REC_LENGTH] = {0};       //USART1接收数据缓存
+uint8_t UART2_temp[REC_LENGTH] = {0};       //USART1接收数据缓存
 
+void UART2_INT_REST()//重置中断数据缓存
+{
+		HAL_UART_Receive_IT(&huart2,(uint8_t *)UART2_temp,REC_LENGTH);//重新启动中断
+		for(int i = 0;i<UART2_Rx_cnt;i++)															//清空缓存区
+		{
+			UART2_Rx_Buf[i] = 0;
+		}
+		UART2_Rx_cnt = 0;
+		UART2_Rx_flg = 0;
+}
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
@@ -40,24 +50,26 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 			{
 			uint8_t DATA[1]="a";
 			HAL_UART_Transmit(&huart2,DATA,1,0x00ff);
+			UART2_INT_REST();//重置中断数据缓存
 			BLE102_AT_command_MODE=0;
 			} 
-			HAL_UART_Receive_IT(&huart2,(uint8_t *)UART2_temp,REC_LENGTH);//重新启动中断
 		}
 		else if(BLE102_AT_command_MODE == 0)
 		{
-
+			
 			UART2_Rx_Buf[UART2_Rx_cnt] = UART2_temp[0];//将接收到的数据送到缓存区
 			UART2_Rx_cnt++;														 //数据长度+1
-			if(0x0a == UART2_temp[0])//判断数据是否为换行
+			if(0x0A == UART2_temp[0]&&UART2_Rx_cnt>=3)//判断数据是否为换行/*&&UART2_Rx_cnt>=3*/
 			{
 				UART2_Rx_flg = 1;															//将接收完成标志置1
 			}
 			HAL_UART_Receive_IT(&huart2,(uint8_t *)UART2_temp,REC_LENGTH);//重新启动中断
+			/*
+
 
 			if(UART2_Rx_flg)
 			{
-				HAL_UART_Transmit(&huart2,UART2_Rx_Buf,UART2_Rx_cnt,0x10);    //发送接收到的数据
+				HAL_UART_Transmit(&huart1,UART2_Rx_Buf,UART2_Rx_cnt,0x10);    //发送接收到的数据
 				for(int i = 0;i<UART2_Rx_cnt;i++)															//清空缓存区
 				{
 					UART2_Rx_Buf[i] = 0;
@@ -65,13 +77,12 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 				UART2_Rx_cnt = 0;
 				UART2_Rx_flg = 0;
 			} 
-
+			*/
 		}
 		else
 		{
 			printf("BLE102AT握手变量 BLE102_AT_command_MODE 出现错误！！ \r\n");
 		}
-
 
   }
 
@@ -102,8 +113,6 @@ void MX_USART1_UART_Init(void)
   {
     Error_Handler();
   }
-
-	
 
 }
 /* USART2 init function */
@@ -149,7 +158,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF7_USART1;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-		
+
   /* USER CODE BEGIN USART1_MspInit 1 */
 
   /* USER CODE END USART1_MspInit 1 */
