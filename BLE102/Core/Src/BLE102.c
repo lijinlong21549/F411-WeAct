@@ -11,7 +11,7 @@ extern "C" {
 #include "usart.h"
 #include "stdio.h"
 #include <string.h>
-
+#include <stdlib.h>
 int BLE102_AT_command_MODE=0;//串口命令模式
 
 /*BLE102状态变量*/
@@ -23,7 +23,9 @@ int BLE102_MODE=1;//BLE102的模式
 								//3：Mesh组网模式
 uint8_t BLE102_MAC[12];//BLE102的MAC地址
 uint8_t BLE102_CIVER[20];//BLE102的软件版本号
-int BLE102_TPL;//BLE102的模块发射功率
+uint8_t BLE102_TPL[1];//BLE102的模块发射功率
+uint8_t BLE102_TPL_dbm[8][6]={{"-14dbm"},{"-11dbm"},{"-8dbm"},{"-5dbm"},{"-2dbm"},{"+2dbm"},{"+4dbm"},{"+8dbm"}};//BLE102模块发射等级所对应的功率
+										
 uint8_t BLE102_PASS[6];//BLE102模块的密码
 int BLE102_PASSEN;//BLE102是否使能连接验证
 								 //1：使能S
@@ -92,12 +94,52 @@ int StringComparison(uint8_t* DATA,uint8_t* pDATA,int NUM)
 	return RE_NUM;
 }
 
+//查询BLE102模块发射功率
+void BLE102_READ_TPL(void)
+{
+	uint8_t DATA_OUT[11]="AT+TPL?\r\n";
+	HAL_UART_Transmit(&huart2,DATA_OUT,11,0x00ff);
+		while(UART2_Rx_flg == 0)
+	{
+	HAL_Delay(1);
+	}
+		if(UART2_Rx_flg)
+	{
+
+		BLE102_TPL[0]=UART2_Rx_Buf[7];
+		
+		printf("BLE102模块发射功率:");
+		HAL_UART_Transmit(&huart1,BLE102_TPL,1,0x10);    //发送接收到的数据
+		UART2_INT_REST();//重置中断数据缓存
+	} 
+}
+
+//查询BLE102模块软件版本号
+void BLE102_READ_CIVER(void)
+{
+	uint8_t DATA_OUT[11]="AT+CIVER?\r\n";
+	HAL_UART_Transmit(&huart2,DATA_OUT,11,0x00ff);
+		while(UART2_Rx_flg == 0)
+	{
+	HAL_Delay(1);
+	}
+		if(UART2_Rx_flg)
+	{
+		for(int i=0;i<UART2_Rx_cnt-7;i++)
+		{
+			BLE102_CIVER[i]=UART2_Rx_Buf[i+7];
+		}
+		printf("BLE102模块软件版本号:");
+		HAL_UART_Transmit(&huart1,BLE102_CIVER,UART2_Rx_cnt-7,0x10);    //发送接收到的数据
+		UART2_INT_REST();//重置中断数据缓存
+	} 
+}
+
 //查询BLE102模块名称
 void BLE102_READ_NAME(void)
 {
 	uint8_t DATA_OUT[10]="AT+NAME?\r\n";
 	HAL_UART_Transmit(&huart2,DATA_OUT,10,0x00ff);
-	uint8_t DATA_INT[15]={0};
 		while(UART2_Rx_flg == 0)
 	{
 	HAL_Delay(1);
@@ -127,10 +169,15 @@ void BLE102_READ_MAC(void)
 	{
 		for(int i=0;i<UART2_Rx_cnt-6;i++)
 		{
-			BLE102_MAC[i+1]=UART2_Rx_Buf[i+7];
+			if(UART2_Rx_Buf[i+7]==0x0A || UART2_Rx_Buf[i+7]==0x0D)
+				{
+					break;
+				}
+			BLE102_MAC[i]=UART2_Rx_Buf[i+7];
 		}
 		printf("BLE102模块MAC地址：");
 		HAL_UART_Transmit(&huart1,BLE102_MAC,UART2_Rx_cnt-6,0x10);    //发送接收到的数据
+		printf("\r\n");
 		UART2_INT_REST();//重置中断数据缓存
 	} 
 }
@@ -191,7 +238,8 @@ void BLE102_Init(void)
 	BLE102_AT_instruction();//进入指令模式
 	BLE102_READ_NAME();//查询模块名称
 	BLE102_READ_MAC();//查询模块MAC地址
-	
+	BLE102_READ_CIVER();//查询模块软件版本号
+	BLE102_READ_TPL();//查询模块发射功率
 	HAL_UART_Receive_IT(&huart2,(uint8_t *)UART2_temp,REC_LENGTH);//开启中断（在AT指令握手完成之后）
 
 }
