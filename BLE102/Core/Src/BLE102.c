@@ -117,10 +117,10 @@ void BLE102_READ_AUTOSLEEP(void)
 			{
 				break;
 			}*/
-			DATA[i]=UART2_Rx_Buf[i+2];
+			DATA[i]=UART2_Rx_Buf[i+0];
 		}
 		printf("BLE102模块自动睡眠参数:");
-		HAL_UART_Transmit(&huart1,DATA,UART2_Rx_cnt-2,0x10);    //发送接收到的数据
+		HAL_UART_Transmit(&huart1,DATA,UART2_Rx_cnt-0,0x10);    //发送接收到的数据
 		printf("\r\n");
 		UART2_INT_REST();//重置中断数据缓存
 	} 

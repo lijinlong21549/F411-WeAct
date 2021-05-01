@@ -3,11 +3,11 @@
 <title>Static Call Graph - [BLE102\BLE102.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image BLE102\BLE102.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Apr 22 19:29:10 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Apr 25 18:21:05 2021
 <BR><P>
-<H3>Maximum Stack Usage =        192 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        176 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-main &rArr; BLE102_Init &rArr; BLE102_READ_AUTOSLEEP &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
+main &rArr; W25Qx_Init &rArr; W25Qx_Get_Parameter &rArr; W25Qx_Read_ID &rArr; HAL_SPI_Receive &rArr; HAL_SPI_TransmitReceive &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
 <P>
 <H3>
 Mutually Recursive functions
@@ -366,7 +366,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[57]"></a>BLE102_Init</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, ble102.o(i.BLE102_Init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 192<LI>Call Chain = BLE102_Init &rArr; BLE102_READ_AUTOSLEEP &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
+<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = BLE102_Init &rArr; BLE102_READ_UART &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Receive_IT
 <LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BLE102_REST
@@ -384,8 +384,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[60]"></a>BLE102_READ_AUTOSLEEP</STRONG> (Thumb, 102 bytes, Stack size 128 bytes, ble102.o(i.BLE102_READ_AUTOSLEEP))
-<BR><BR>[Stack]<UL><LI>Max Depth = 184<LI>Call Chain = BLE102_READ_AUTOSLEEP &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
+<P><STRONG><a name="[60]"></a>BLE102_READ_AUTOSLEEP</STRONG> (Thumb, 98 bytes, Stack size 80 bytes, ble102.o(i.BLE102_READ_AUTOSLEEP))
+<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = BLE102_READ_AUTOSLEEP &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART2_INT_REST
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit
@@ -1047,7 +1047,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> printf5.o(i.__0printf$5)
 </UL>
 <P><STRONG><a name="[43]"></a>main</STRONG> (Thumb, 120 bytes, Stack size 0 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 192<LI>Call Chain = main &rArr; BLE102_Init &rArr; BLE102_READ_AUTOSLEEP &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
+<BR><BR>[Stack]<UL><LI>Max Depth = 176<LI>Call Chain = main &rArr; W25Qx_Init &rArr; W25Qx_Get_Parameter &rArr; W25Qx_Read_ID &rArr; HAL_SPI_Receive &rArr; HAL_SPI_TransmitReceive &rArr; SPI_EndRxTxTransaction &rArr; SPI_WaitFlagStateUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART2_UART_Init
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART1_UART_Init
