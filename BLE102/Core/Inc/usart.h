@@ -50,6 +50,7 @@ void UART2_INT_REST();
 
 void MX_USART1_UART_Init(void);
 void MX_USART2_UART_Init(void);
+void USER_UART_IRQHandler(UART_HandleTypeDef *huart);
 
 /* USER CODE BEGIN Prototypes */
 

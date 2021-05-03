@@ -37,6 +37,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+uint8_t receive_buff[255];
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -106,6 +107,8 @@ int main(void)
 	//W25Qx_test();
 
 	BLE102_Init();
+	__HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE);
+	HAL_UART_Receive_DMA(&huart1, (uint8_t*)receive_buff, 255);
   /* USER CODE END 2 */
 
   /* Infinite loop */
