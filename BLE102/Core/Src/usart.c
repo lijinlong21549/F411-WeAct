@@ -23,28 +23,73 @@
 /* USER CODE BEGIN 0 */
 #include "BLE102.h"
 
-extern uint8_t receive_buff[255];
-void USAR_UART_IDLECallback(UART_HandleTypeDef *huart)
+
+uint8_t UART1_Rx_flg = 0;                   //USART1接收完成标志
+uint8_t UART2_Rx_flg = 0;                   //USART2接收完成标志
+uint8_t UART1_receive_buff[255];						//串口1的缓存变量
+uint8_t UART2_receive_buff[255];						//串口2的缓存变量
+int UART1_data_length;											//串口1的数据长度
+int UART2_data_length;											//串口2的数据长度
+//extern uint8_t receive_buff[255];
+
+//串口2的中断重载函数
+void USAR2_Interrupt_reload()
+{  
+	  //清零接收缓冲区
+    memset(UART2_receive_buff,0,255);                                            
+    UART2_data_length = 0;
+		//清除接收完成标志位
+		UART2_Rx_flg = 0;
+    //重启开始DMA传输 每次255字节数据
+    HAL_UART_Receive_DMA(&huart2, (uint8_t*)UART2_receive_buff, 255);       
+}
+
+//串口1的中断重载函数
+void USAR1_Interrupt_reload()
+{
+	  //清零接收缓冲区
+    memset(UART1_receive_buff,0,255);
+    UART1_data_length = 0;
+		//清除接收完成标志位
+		UART1_Rx_flg = 0;
+    //重启开始DMA传输 每次255字节数据
+    HAL_UART_Receive_DMA(&huart1, (uint8_t*)UART1_receive_buff, 255);
+}
+
+//串口1的中断处理函数
+void USAR1_IDLECallback(UART_HandleTypeDef *huart)
 {
 	//停止本次DMA传输
     HAL_UART_DMAStop(&huart1);  
                                                        
     //计算接收到的数据长度
-    uint8_t data_length  = 1024 - __HAL_DMA_GET_COUNTER(huart1.hdmarx);   
-    
-	//测试函数：将接收到的数据打印出去
-    printf("Receive Data(length = %d): ",data_length);
-    HAL_UART_Transmit(&huart1,receive_buff,data_length,0x200);                     
+    UART1_data_length  =255-__HAL_DMA_GET_COUNTER(huart1.hdmarx);
+		//将接收完成标志置1
+    UART1_Rx_flg=1;
+		//测试函数：将接收到的数据打印出去
+    printf("Receive Data(length = %d): ",UART1_data_length);
+    HAL_UART_Transmit(&huart1,UART1_receive_buff,UART1_data_length,0x200);                     
     printf("\r\n");
-    
-	//清零接收缓冲区
-    memset(receive_buff,0,data_length);                                            
-    data_length = 0;
-    
-    //重启开始DMA传输 每次255字节数据
-    HAL_UART_Receive_DMA(&huart1, (uint8_t*)receive_buff, 255);                    
+		USAR1_Interrupt_reload();
 }
 
+//串口2的中断处理函数
+void USAR2_IDLECallback(UART_HandleTypeDef *huart)
+{
+	//停止本次DMA传输
+    HAL_UART_DMAStop(&huart2);  
+    
+    //计算接收到的数据长度
+    UART2_data_length  =255-__HAL_DMA_GET_COUNTER(huart2.hdmarx);   
+    //将接收完成标志置1
+    UART2_Rx_flg=1;
+		//测试函数：将接收到的数据打印出去
+    //printf("Receive Data(length = %d): ",UART2_data_length);
+    //HAL_UART_Transmit(&huart1,UART2_receive_buff,UART2_data_length,0x200);
+    //printf("\r\n");      
+		//USAR2_Interrupt_reload();
+}
+//中断判断函数
 void USER_UART_IRQHandler(UART_HandleTypeDef *huart)
 {
     if(USART1 == huart1.Instance)                                   //判断是否是串口1
@@ -52,15 +97,27 @@ void USER_UART_IRQHandler(UART_HandleTypeDef *huart)
         if(RESET != __HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE))   //判断是否是空闲中断
         {
             __HAL_UART_CLEAR_IDLEFLAG(&huart1);                     //清楚空闲中断标志（否则会一直不断进入中断）
-            printf("\r\nUART1 Idle IQR Detected\r\n");
-            USAR_UART_IDLECallback(huart);                          //调用中断处理函数
+            //printf("\r\nUART1 Idle IQR Detected\r\n");
+            USAR1_IDLECallback(huart);                          //调用中断处理函数
         }
     }
+    if(USART2 == huart2.Instance)                                   //判断是否是串口1
+    {
+        if(RESET != __HAL_UART_GET_FLAG(&huart2, UART_FLAG_IDLE))   //判断是否是空闲中断
+        {
+            __HAL_UART_CLEAR_IDLEFLAG(&huart2);                     //清楚空闲中断标志（否则会一直不断进入中断）
+            //printf("\r\nUART2 Idle IQR Detected\r\n");
+            USAR2_IDLECallback(huart);                          //调用中断处理函数
+        }
+    }
+		
 }
 
-/*串口2中断变量*/
+
+
+//串口2中断变量
 uint8_t UART2_Rx_Buf[MAX_REC_LENGTH] = {0}; //USART1存储接收数据
-uint8_t UART2_Rx_flg = 0;                   //USART1接收完成标志
+
 unsigned int  UART2_Rx_cnt = 0;                   //USART1接受数据计数器
 uint8_t UART2_temp[REC_LENGTH] = {0};       //USART1接收数据缓存
 
@@ -74,7 +131,7 @@ void UART2_INT_REST()//重置中断数据缓存
 		UART2_Rx_cnt = 0;
 		UART2_Rx_flg = 0;
 }
-
+/*
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
   if(huart->Instance==USART2)//判断中断函数
@@ -94,12 +151,12 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 			
 			UART2_Rx_Buf[UART2_Rx_cnt] = UART2_temp[0];//将接收到的数据送到缓存区
 			UART2_Rx_cnt++;														 //数据长度+1
-			if(0x0A == UART2_temp[0]&&UART2_Rx_cnt>=3)//判断数据是否为换行/*&&UART2_Rx_cnt>=3*/
+			if(0x0A == UART2_temp[0]&&UART2_Rx_cnt>=3)//判断数据是否为换行  &&UART2_Rx_cnt>=3
 			{
 				UART2_Rx_flg = 1;															//将接收完成标志置1
 			}
 			HAL_UART_Receive_IT(&huart2,(uint8_t *)UART2_temp,REC_LENGTH);//重新启动中断
-			/*
+			//
 
 
 			if(UART2_Rx_flg)
@@ -112,7 +169,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 				UART2_Rx_cnt = 0;
 				UART2_Rx_flg = 0;
 			} 
-			*/
+			//
 		}
 		else
 		{
@@ -120,7 +177,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		}
 
   }
-	/*
+	
 	if(huart->Instance==USART1)//判断中断函数
   {
 			UART2_Rx_Buf[UART2_Rx_cnt] = UART2_temp[0];//将接收到的数据送到缓存区
@@ -142,8 +199,13 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 			} 
 		
 	}
-	*/
+	
 }
+*/
+
+
+
+
 
 /* USER CODE END 0 */
 
@@ -171,7 +233,8 @@ void MX_USART1_UART_Init(void)
   {
     Error_Handler();
   }
-
+	__HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE);
+	HAL_UART_Receive_DMA(&huart1, (uint8_t*)UART1_receive_buff, 255);
 }
 /* USART2 init function */
 
@@ -190,7 +253,8 @@ void MX_USART2_UART_Init(void)
   {
     Error_Handler();
   }
-
+	__HAL_UART_ENABLE_IT(&huart2, UART_IT_IDLE);
+	HAL_UART_Receive_DMA(&huart2, (uint8_t*)UART2_receive_buff, 255);
 }
 
 void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)

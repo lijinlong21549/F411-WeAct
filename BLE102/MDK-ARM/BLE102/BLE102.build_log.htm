@@ -27,18 +27,22 @@ Project File Date:  05/03/2021
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\Keil5\ARM\ARMCC\Bin'
 Build target 'BLE102'
-compiling main.c...
+compiling BLE102.c...
 ../Core/Inc/usart.h(48): warning:  #1295-D: Deprecated declaration UART2_INT_REST - give arg types
   void UART2_INT_REST();
-../Core/Src/main.c: 1 warning, 0 errors
-compiling usart.c...
-../Core/Inc/usart.h(48): warning:  #1295-D: Deprecated declaration UART2_INT_REST - give arg types
-  void UART2_INT_REST();
-../Core/Src/usart.c: 1 warning, 0 errors
+../Core/Inc/usart.h(53): warning:  #1295-D: Deprecated declaration USAR2_Interrupt_reload - give arg types
+  void USAR2_Interrupt_reload();
+../Core/Inc/usart.h(54): warning:  #1295-D: Deprecated declaration USAR1_Interrupt_reload - give arg types
+  void USAR1_Interrupt_reload();
+..\Core\Src\BLE102.c(136): warning:  #175-D: subscript out of range
+  	return DATA_return[255];
+..\Core\Src\BLE102.c(138): warning: C4487E: read from variable 'DATA_return' with offset out of bounds
+}
+..\Core\Src\BLE102.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=13664 RO-data=792 RW-data=56 ZI-data=3024  
+Program Size: Code=12068 RO-data=792 RW-data=44 ZI-data=3188  
 FromELF: creating hex file...
-"BLE102\BLE102.axf" - 0 Error(s), 2 Warning(s).
+"BLE102\BLE102.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 
