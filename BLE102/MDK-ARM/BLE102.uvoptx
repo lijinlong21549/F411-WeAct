@@ -158,17 +158,12 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>UART2_receive_buff</ItemText>
+          <ItemText>DATA_Printf</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>UART2_Rx_flg</ItemText>
-        </Ww>
-        <Ww>
-          <count>2</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>UART2_data_length</ItemText>
+          <ItemText>DATA</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>

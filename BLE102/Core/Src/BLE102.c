@@ -12,8 +12,10 @@ extern "C" {
 #include "stdio.h"
 #include <string.h>
 #include <stdlib.h>
-
+#include "stdarg.h"
 //声明串口中断变量
+extern uint8_t UART1_TX_DMA_OVER;							//USART1发送完成标志
+extern uint8_t UART2_TX_DMA_OVER;							//USART2发送完成标志
 extern uint8_t UART1_Rx_flg;                   //USART1接收完成标志
 extern uint8_t UART2_Rx_flg;                   //USART2接收完成标志
 extern uint8_t UART1_receive_buff[255];						//串口1的缓存变量
@@ -22,8 +24,9 @@ extern int UART1_data_length;											//串口1的数据长度
 extern int UART2_data_length;											//串口2的数据长度
 /*字符串截取函数变量*/
 uint8_t String_Intercept_DATA_return[255]={0};//返回数据
-int String_Intercept_DATA_long=1;//数据长度
-
+int String_Intercept_DATA_long=0;//数据长度
+/*DMA发送缓存*/
+uint8_t DATA_Printf[255]={0};
 /*硬件层宏定义*/
 /********************************************************************/
 int BLE102_AT_command_MODE=0;//串口命令模式
@@ -91,6 +94,24 @@ uint8_t BLE102_IBEACON_Rssi[20];//信号强度
 #define BLE102_RES_Enable() 			HAL_GPIO_WritePin(BLE102_RES_GPIO_Port, BLE102_RES_Pin, GPIO_PIN_RESET)  //低电平
 #define BLE102_RES_Disable() 			HAL_GPIO_WritePin(BLE102_RES_GPIO_Port, BLE102_RES_Pin, GPIO_PIN_SET)	   //高电平
 
+
+
+/**
+  * @brief  复制字符串内容
+  * @param  参数：
+								DATA:原始数据
+								pDATA：被复制字符串
+								Bit_long：复制字符串长度
+  * @retval 空值
+  */
+void Transfer_character(uint8_t* DATA,uint8_t* PDATA,int Bit_long)
+{
+	for(int i=0;i<Bit_long;i++)
+	{
+	PDATA[i]=DATA[i];
+	}
+}
+
 //判断两个字符串是否一致
 int StringComparison(uint8_t* DATA,uint8_t* pDATA,int NUM)
 {
@@ -113,27 +134,29 @@ int StringComparison(uint8_t* DATA,uint8_t* pDATA,int NUM)
 /**
   * @brief  截取字符串内容函数
   * @param  参数：
-		
+								DATA:原始数据
+								DATA_begin_long：数据起始位置
+								DATA_STOP：数据停止字符
   * @retval 空值
   */
-void String_Intercept(uint8_t *DATA[255],int DATA_begin_long,uint8_t DATA_STOP[1])
+void String_Intercept(uint8_t DATA[255],int DATA_begin_long,uint8_t DATA_STOP[1])
 {	
 	//将数据转移到pDATA
 	uint8_t pDATA[255];
 	for(int i=1;i<255;i++)
 	{
-	pDATA[i] = *DATA[i];
+	pDATA[i] = DATA[i];
 	}
 
 	for(int i=1;i<255;i++)
 	{
 	String_Intercept_DATA_return[i] =0x00;
 	}
-	String_Intercept_DATA_long=1;
+	String_Intercept_DATA_long=0;
 
 	for(int B=DATA_begin_long;B<255;B++)
 	{
-		if((pDATA[B]==DATA_STOP[1])==0)
+		if((pDATA[B]==DATA_STOP[0])==0)
 		{
 			String_Intercept_DATA_return[String_Intercept_DATA_long] = pDATA[B];
 			String_Intercept_DATA_long++;
@@ -398,29 +421,31 @@ void BLE102_READ_NAME(void)
 //查询BLE102模块MAC地址
 void BLE102_READ_MAC(void)
 {
-	uint8_t DATA_OUT[9]="AT+SCAN\r\n";
-	HAL_UART_Transmit(&huart2,DATA_OUT,9,0x00ff);
+	char DATA_OUT[9]="AT+MAC?\r\n";
+	USART2_DMA_printf(DATA_OUT,9);
 		while(UART2_Rx_flg == 0)
-	{
-	HAL_Delay(1);
-	}
-	/*
-		if(UART2_Rx_flg)
-	{
-		for(int i=0;i<UART2_Rx_cnt-6;i++)
 		{
-			if(UART2_Rx_Buf[i+7]==0x0A || UART2_Rx_Buf[i+7]==0x0D)
-				{
-					break;
-				}
-			BLE102_MAC[i]=UART2_Rx_Buf[i+7];
+		HAL_Delay(1);
 		}
-		printf("BLE102模块MAC地址：");
-		HAL_UART_Transmit(&huart1,BLE102_MAC,UART2_Rx_cnt-6,0x10);    //发送接收到的数据
-		printf("\r\n");
-		*/
-		USAR2_Interrupt_reload();//重置中断数据缓存
-	//} 
+
+	int Begin_bit=2+5;					//定义开始位置
+	uint8_t Stop_bit[1]="\r";		//定义截止符
+	
+	String_Intercept(UART2_receive_buff,Begin_bit,Stop_bit);//截取字符
+	Transfer_character(String_Intercept_DATA_return,BLE102_MAC,12);//将截取的字符存储入指定变量
+	
+	//清空输出变量
+	for(int i=0;i<255;i++)
+	{
+	DATA_Printf[i]=0x00;
+	}
+
+	strcat((char*)DATA_Printf,(char*)"BLE102模块MAC地址：");
+	strcat((char*)DATA_Printf,(char*)BLE102_MAC);
+	strcat((char*)DATA_Printf,(char*)"\r\n");
+	USART1_DMA_printf(DATA_Printf);
+	USAR2_Interrupt_reload();//重置中断数据缓存
+
 }
 
 //复位BLE102模块

@@ -52,7 +52,11 @@ void MX_USART1_UART_Init(void);
 void MX_USART2_UART_Init(void);
 void USAR2_Interrupt_reload();
 void USAR1_Interrupt_reload();
+void USART1_DMA_printf(uint8_t* DATA);
+void USART1_DMA_OVER();
 void USER_UART_IRQHandler(UART_HandleTypeDef *huart);
+void USART2_DMA_OVER();
+void USART2_DMA_printf(char* DATA,int bit);
 
 /* USER CODE BEGIN Prototypes */
 

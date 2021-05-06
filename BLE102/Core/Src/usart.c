@@ -30,7 +30,51 @@ uint8_t UART1_receive_buff[255];						//串口1的缓存变量
 uint8_t UART2_receive_buff[255];						//串口2的缓存变量
 int UART1_data_length;											//串口1的数据长度
 int UART2_data_length;											//串口2的数据长度
+
+uint8_t UART1_TX_DMA_OVER = 0;							//USART1发送完成标志
+uint8_t UART2_TX_DMA_OVER = 0;							//USART2发送完成标志
 //extern uint8_t receive_buff[255];
+
+//串口2的DMA发送完成中断函数
+void USART2_DMA_OVER()
+{
+	UART2_TX_DMA_OVER = 0;
+}
+
+//串口2的DMA发送函数
+void USART2_DMA_printf(char* DATA,int bit)
+{
+	while(UART2_TX_DMA_OVER == 1)//判断发送完成标志是否为1
+	{
+		HAL_Delay(50);
+	}
+	if(UART2_TX_DMA_OVER == 0)
+	{
+		UART2_TX_DMA_OVER = 1;//将发送标志置为0
+		HAL_UART_Transmit_DMA(&huart2, (uint8_t *)DATA, strlen(DATA));
+	}
+	
+}
+
+//串口1的DMA发送函数
+void USART1_DMA_printf(uint8_t* DATA)
+{
+	while(UART1_TX_DMA_OVER == 1)//判断发送完成标志是否为1
+	{
+		HAL_Delay(50);
+	}
+	if(UART1_TX_DMA_OVER == 0)
+	{
+		UART1_TX_DMA_OVER = 1;//将发送标志置为0
+		HAL_UART_Transmit_DMA(&huart1, (uint8_t *)DATA, 255);
+	}
+	
+}
+//串口1的DMA发送完成中断函数
+void USART1_DMA_OVER()
+{
+	UART1_TX_DMA_OVER = 0;
+}
 
 //串口2的中断重载函数
 void USAR2_Interrupt_reload()

@@ -27,6 +27,18 @@ Project File Date:  05/03/2021
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\Keil5\ARM\ARMCC\Bin'
 Build target 'BLE102'
+compiling stm32f4xx_it.c...
+../Core/Inc/usart.h(48): warning:  #1295-D: Deprecated declaration UART2_INT_REST - give arg types
+  void UART2_INT_REST();
+../Core/Inc/usart.h(53): warning:  #1295-D: Deprecated declaration USAR2_Interrupt_reload - give arg types
+  void USAR2_Interrupt_reload();
+../Core/Inc/usart.h(54): warning:  #1295-D: Deprecated declaration USAR1_Interrupt_reload - give arg types
+  void USAR1_Interrupt_reload();
+../Core/Inc/usart.h(56): warning:  #1295-D: Deprecated declaration USART1_DMA_OVER - give arg types
+  void USART1_DMA_OVER();
+../Core/Inc/usart.h(58): warning:  #1295-D: Deprecated declaration USART2_DMA_OVER - give arg types
+  void USART2_DMA_OVER();
+../Core/Src/stm32f4xx_it.c: 5 warnings, 0 errors
 compiling BLE102.c...
 ../Core/Inc/usart.h(48): warning:  #1295-D: Deprecated declaration UART2_INT_REST - give arg types
   void UART2_INT_REST();
@@ -34,15 +46,15 @@ compiling BLE102.c...
   void USAR2_Interrupt_reload();
 ../Core/Inc/usart.h(54): warning:  #1295-D: Deprecated declaration USAR1_Interrupt_reload - give arg types
   void USAR1_Interrupt_reload();
-..\Core\Src\BLE102.c(136): warning:  #175-D: subscript out of range
-  	return DATA_return[255];
-..\Core\Src\BLE102.c(138): warning: C4487E: read from variable 'DATA_return' with offset out of bounds
-}
+../Core/Inc/usart.h(56): warning:  #1295-D: Deprecated declaration USART1_DMA_OVER - give arg types
+  void USART1_DMA_OVER();
+../Core/Inc/usart.h(58): warning:  #1295-D: Deprecated declaration USART2_DMA_OVER - give arg types
+  void USART2_DMA_OVER();
 ..\Core\Src\BLE102.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=12068 RO-data=792 RW-data=44 ZI-data=3188  
+Program Size: Code=12656 RO-data=792 RW-data=52 ZI-data=3716  
 FromELF: creating hex file...
-"BLE102\BLE102.axf" - 0 Error(s), 5 Warning(s).
+"BLE102\BLE102.axf" - 0 Error(s), 10 Warning(s).
 
 <h2>Software Packages used:</h2>
 
