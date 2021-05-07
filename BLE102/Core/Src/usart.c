@@ -46,27 +46,39 @@ void USART2_DMA_printf(char* DATA,int bit)
 {
 	while(UART2_TX_DMA_OVER == 1)//判断发送完成标志是否为1
 	{
-		HAL_Delay(50);
+		HAL_Delay(10);
 	}
+
+
 	if(UART2_TX_DMA_OVER == 0)
 	{
 		UART2_TX_DMA_OVER = 1;//将发送标志置为0
 		HAL_UART_Transmit_DMA(&huart2, (uint8_t *)DATA, strlen(DATA));
 	}
-	
+	else
+	{
+		printf("串口2出错 \r\n");
+	}
 }
 
 //串口1的DMA发送函数
-void USART1_DMA_printf(uint8_t* DATA)
+void USART1_DMA_printf(char* DATA)
 {
 	while(UART1_TX_DMA_OVER == 1)//判断发送完成标志是否为1
 	{
-		HAL_Delay(50);
+		HAL_Delay(10);
 	}
+
+
 	if(UART1_TX_DMA_OVER == 0)
 	{
 		UART1_TX_DMA_OVER = 1;//将发送标志置为0
-		HAL_UART_Transmit_DMA(&huart1, (uint8_t *)DATA, 255);
+		HAL_UART_Transmit_DMA(&huart1, (uint8_t *)DATA, strlen(DATA));
+		printf("发送 \r\n");
+	}
+	else
+	{
+		printf("串口1出错 \r\n");
 	}
 	
 }
