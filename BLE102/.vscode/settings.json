@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.c": "c",
+        "ble102.h": "c",
+        "math.h": "c"
+    }
+}

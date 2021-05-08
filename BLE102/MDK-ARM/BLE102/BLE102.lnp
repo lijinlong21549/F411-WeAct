@@ -2,6 +2,7 @@
 "ble102\startup_stm32f411xe.o"
 "ble102\w25q64.o"
 "ble102\ble102.o"
+"ble102\ble102_text.o"
 "ble102\main.o"
 "ble102\gpio.o"
 "ble102\dma.o"

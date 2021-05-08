@@ -105,6 +105,12 @@ int main(void)
 	W25Qx_Init();
 	printf("初始化SPI flash成功 \r\n");
 	//W25Qx_test();
+	USAR1_Interrupt_reload();
+	USAR2_Interrupt_reload();
+	HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
+	HAL_NVIC_EnableIRQ(DMA1_Stream6_IRQn);
+	HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
+	HAL_NVIC_EnableIRQ(DMA2_Stream7_IRQn);
 
 	BLE102_Init();
 

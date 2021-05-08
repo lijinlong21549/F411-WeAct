@@ -19,9 +19,15 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "usart.h"
-#include <string.h>
+
 /* USER CODE BEGIN 0 */
 #include "BLE102.h"
+#include "stdio.h"
+#include <string.h>
+#include <stdlib.h>
+#include "stdarg.h"
+#include "math.h"
+
 
 
 uint8_t UART1_Rx_flg = 0;                   //USART1接收完成标志
@@ -289,8 +295,8 @@ void MX_USART1_UART_Init(void)
   {
     Error_Handler();
   }
-	__HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE);
-	HAL_UART_Receive_DMA(&huart1, (uint8_t*)UART1_receive_buff, 255);
+
+
 }
 /* USART2 init function */
 
@@ -309,8 +315,7 @@ void MX_USART2_UART_Init(void)
   {
     Error_Handler();
   }
-	__HAL_UART_ENABLE_IT(&huart2, UART_IT_IDLE);
-	HAL_UART_Receive_DMA(&huart2, (uint8_t*)UART2_receive_buff, 255);
+
 }
 
 void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)

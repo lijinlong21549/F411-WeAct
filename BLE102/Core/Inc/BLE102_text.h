@@ -17,56 +17,29 @@
   ******************************************************************************
   */
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __USART_H__
-#define __USART_H__
+#ifndef __BLE102_text_H__
+#define __BLE102_text_H__
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
 
-/* USER CODE BEGIN Includes */
+#include "main.h"
 #include "stdio.h"
 
-#define REC_LENGTH  1
-#define MAX_REC_LENGTH  1024 
+void Keyword_String_Intercept(uint8_t* DATA,uint8_t* PDATA,uint8_t* Keyword,uint8_t* DATA_STOP);
+int Characters_converted_numbers(uint8_t* DATA);
+void Transfer_character(uint8_t* DATA,uint8_t* PDATA,int Bit_long);
+int StringComparison(uint8_t* DATA,uint8_t* pDATA,int NUM);
+void String_Intercept(uint8_t DATA[255],int DATA_begin_long,uint8_t DATA_STOP[1]);
 
-/*串口2中断变量*/
-extern uint8_t UART2_Rx_Buf[MAX_REC_LENGTH];
-extern uint8_t UART2_Rx_flg ;
-extern unsigned int  UART2_Rx_cnt ;
-extern uint8_t UART2_temp[REC_LENGTH];
-
-/* USER CODE END Includes */
-
-extern UART_HandleTypeDef huart1;
-extern UART_HandleTypeDef huart2;
-
-/* USER CODE BEGIN Private defines */
-void UART2_INT_REST(void);
-void USART1_DMA_printf(char* DATA);
-void USART2_DMA_printf(char* DATA,int bit);
-void USAR1_Interrupt_reload(void);
-void USAR2_Interrupt_reload(void);
-void USER_UART_IRQHandler(UART_HandleTypeDef *huart);
-void USART1_DMA_OVER();
-void USART2_DMA_OVER();
-
-/* USER CODE END Private defines */
-
-void MX_USART1_UART_Init(void);
-void MX_USART2_UART_Init(void);
-
-/* USER CODE BEGIN Prototypes */
-
-/* USER CODE END Prototypes */
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __USART_H__ */
+#endif /* __BLE102_text_H__ */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
