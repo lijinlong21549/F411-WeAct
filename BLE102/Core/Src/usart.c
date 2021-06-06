@@ -296,7 +296,6 @@ void MX_USART1_UART_Init(void)
     Error_Handler();
   }
 
-
 }
 /* USART2 init function */
 

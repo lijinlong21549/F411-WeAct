@@ -20,6 +20,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "dma.h"
+#include "i2c.h"
 #include "spi.h"
 #include "usart.h"
 #include "gpio.h"
@@ -28,6 +29,9 @@
 /* USER CODE BEGIN Includes */
 #include "W25Q64.h"
 #include "BLE102.h"
+#include "oled.h"
+#include "BLE102.h"
+#include "bmp.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -95,6 +99,7 @@ int main(void)
   MX_SPI1_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
+  MX_I2C1_Init();
 
   /* Initialize interrupts */
   MX_NVIC_Init();
@@ -111,17 +116,46 @@ int main(void)
 	HAL_NVIC_EnableIRQ(DMA1_Stream6_IRQn);
 	HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
 	HAL_NVIC_EnableIRQ(DMA2_Stream7_IRQn);
-
 	BLE102_Init();
+	OLED_Init();
 
+	OLED_Clear();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
   while (1)
   {
     /* USER CODE END WHILE */
+    
+    OLED_ShowChar(0, 0, 'A', 16);
+    OLED_ShowChar(0, 2, 'B', 16);
+    OLED_ShowChar(0, 4, 'C', 16);
+    OLED_ShowChar(0, 6, 'D', 16);
 
+    OLED_ShowChar(15, 0, 'A', 12);
+    OLED_ShowChar(15, 1, 'B', 12);
+    OLED_ShowChar(15, 2, 'C', 12);
+    OLED_ShowChar(15, 3, 'D', 12);
+    OLED_ShowChar(15, 4, 'E', 12);
+    OLED_ShowChar(15, 5, 'F', 12);
+    OLED_ShowChar(15, 6, 'G', 12);
+    OLED_ShowChar(15, 7, 'H', 12);
+
+    OLED_ShowString(30, 0, "mculover666", 12);
+
+    OLED_ShowCHinese(35, 2, 0);
+    OLED_ShowCHinese(65, 2, 1);
+    OLED_ShowCHinese(95, 2, 2);
+
+    OLED_ShowString(36, 6, "IoT Board", 16);
+
+    HAL_Delay(10);
+		//OLED_Clear();
+    //OLED_DrawBMP(0, 0, 128, 8,BMP1);
+
+    //HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

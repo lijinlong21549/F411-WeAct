@@ -182,7 +182,126 @@ void BLE102_judge_AT_MODE(void)
 	}
 }
 
+/**
+* @brief  设置BLE102模块的工作模式
+* @param	DATA:工作模式
+				M:主设备模式
+				S:从设备模式
+				B:广播或iBeacon模式
+				F:Mesh组网模式
+* @retval DATA_Return：
+											成功返回1
+											失败返回0
+*/
+int BLE102_write_MODE(uint8_t* DATA)
+{
+	BLE102_judge_AT_MODE();
 
+	uint8_t Compared_DATA[4][1]={{"M"},{"S"},{"B"},{"F"}};//创建对比变量
+	
+	char DATA_OUT[11]="AT+MODE=";
+
+	if(StringComparison(DATA,Compared_DATA[0],1))
+	{
+		strcat((char*)DATA_OUT,(char*)"M\r\n");
+		USART2_DMA_printf(DATA_OUT,11);
+	}
+	else if (StringComparison(DATA,Compared_DATA[1],1))
+	{
+		strcat((char*)DATA_OUT,(char*)"S\r\n");
+		USART2_DMA_printf(DATA_OUT,11);
+	}
+	else if (StringComparison(DATA,Compared_DATA[2],1))
+	{
+		strcat((char*)DATA_OUT,(char*)"B\r\n");
+		USART2_DMA_printf(DATA_OUT,11);
+	}
+	else if (StringComparison(DATA,Compared_DATA[3],1))
+	{
+		strcat((char*)DATA_OUT,(char*)"F\r\n");
+		USART2_DMA_printf(DATA_OUT,11);
+	}
+	else
+	{
+		USART1_DMA_printf((char*)"错误");
+	}
+
+	//等待BLE102设置完成，返回数据
+	while(UART2_Rx_flg == 0)
+	{
+	HAL_Delay(1);
+	}
+	uint8_t DATA_MODE[1]={0};
+	DATA_MODE[0]=UART2_receive_buff[8];
+	int ret =0;//返回变量
+
+	//清空输出变量
+	for(int i=0;i<255;i++)
+	{
+	DATA_Printf[i]=0x00;
+	}
+
+
+	if(StringComparison(DATA_MODE,Compared_DATA[0],1))
+	{
+		BLE102_MODE=0;
+	}
+	else if (StringComparison(DATA_MODE,Compared_DATA[1],1))
+	{
+		BLE102_MODE=1;
+	}
+	else if (StringComparison(DATA_MODE,Compared_DATA[2],1))
+	{
+		BLE102_MODE=2;
+	}
+	else if (StringComparison(DATA_MODE,Compared_DATA[3],1))
+	{
+		BLE102_MODE=3;
+	}
+
+	//判断需要设置的参数和现状态是否一致
+	if(StringComparison(DATA,Compared_DATA[0],1)&&BLE102_MODE==0)
+	{
+	ret=1;
+	}
+	else
+	{
+	ret=0;
+	}
+
+	if(StringComparison(DATA,Compared_DATA[1],1)&&BLE102_MODE==1)
+	{
+	ret=1;
+	}
+	else
+	{
+	ret=0;
+	}
+
+	if(StringComparison(DATA,Compared_DATA[2],1)&&BLE102_MODE==2)
+	{
+	ret=1;
+	}
+	else
+	{
+	ret=0;
+	}
+	
+	if(StringComparison(DATA,Compared_DATA[3],1)&&BLE102_MODE==3)
+	{
+	ret=1;
+	}
+	else
+	{
+	ret=0;
+	}
+
+	HAL_Delay(500);
+	
+	USAR2_Interrupt_reload();//重置中断数据缓存
+
+	return ret;
+}
 
 /*BLE102指令操作函数*/
 
@@ -239,7 +358,7 @@ void BLE102_READ_MODE(void)
 	}
 	else
 	{
-				strcat((char*)DATA_Printf,(char*)"错误\r\n");
+		strcat((char*)DATA_Printf,(char*)"错误\r\n");
 	}
 	
 	USART1_DMA_printf((char*)DATA_Printf);
@@ -717,6 +836,7 @@ void BLE102_Init(void)
 	printf("BLE102初始化： \r\n");
 	__HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE);
 	__HAL_UART_ENABLE_IT(&huart2, UART_IT_IDLE);
+
 	BLE102_REST();//复位BLE102模块
 	BLE102_AT_instruction();//进入指令模式
 	BLE102_READ_NAME();//查询模块名称
@@ -732,6 +852,13 @@ void BLE102_Init(void)
 	BLE102_READ_LINK();//查询BLE102模块连接状态
 	//BLE102_READ_SCAN();//查询BLE102模块周围从机
 	BLE102_READ_MODE();//查询BLE102模块的工作模式
+
+
+
+	uint8_t MODE_bit[1]="S";
+	BLE102_write_MODE(MODE_bit);//设置BLE102模块的工作模式
+	BLE102_READ_MODE();//查询BLE102模块的工作模式
+
 	HAL_UART_Receive_IT(&huart2,(uint8_t *)UART2_temp,REC_LENGTH);//开启中断（在AT指令握手完成之后）
 
 }
