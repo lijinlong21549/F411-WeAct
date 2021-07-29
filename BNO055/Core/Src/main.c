@@ -26,9 +26,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "W25Q64.h"
-#include "oled.h"
-#include "BNO055.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -93,29 +91,8 @@ int main(void)
   MX_SPI1_Init();
   MX_USART1_UART_Init();
   MX_I2C1_Init();
-  MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
-	
-	HAL_Delay(10);
-	printf("开始初始化SPI flash \r\n");
-	W25Qx_Init();
-	printf("初始化SPI flash成功 \r\n");
 
-	printf("存储数据：W25Q64 \r\n");
-	
-	uint8_t DATA[6]="W25Q64";
-	uint8_t pDATA[6];
-
-	W25Qx_Write(DATA,0*00, 6);
-
-	//W25Qx_Erase_Block(0*00);
-
-	printf("取出数据：");
-	W25Qx_Read(pDATA,0*00,6);
-	printf("%s\r\n",pDATA);
-
-
-	BNO055_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -125,7 +102,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		HAL_Delay(50);
   }
   /* USER CODE END 3 */
 }

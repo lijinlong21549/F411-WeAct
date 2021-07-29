@@ -7,8 +7,6 @@
 "bno055\usart.o"
 "bno055\stm32f4xx_it.o"
 "bno055\stm32f4xx_hal_msp.o"
-"bno055\w25q64.o"
-"bno055\oled.o"
 "bno055\bno055.o"
 "bno055\stm32f4xx_hal_i2c.o"
 "bno055\stm32f4xx_hal_i2c_ex.o"
