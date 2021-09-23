@@ -1,8 +1,6 @@
 --cpu=Cortex-M4.fp.sp
 "ble102\startup_stm32f411xe.o"
 "ble102\w25q64.o"
-"ble102\ble102.o"
-"ble102\ble102_text.o"
 "ble102\oled.o"
 "ble102\main.o"
 "ble102\gpio.o"
@@ -32,6 +30,8 @@
 "ble102\stm32f4xx_hal_tim_ex.o"
 "ble102\stm32f4xx_hal_uart.o"
 "ble102\system_stm32f4xx.o"
+"ble102\ble102_use.o"
+"ble102\ble102_control.o"
 --library_type=microlib --strict --scatter "BLE102\BLE102.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

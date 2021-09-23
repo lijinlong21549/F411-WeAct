@@ -116,7 +116,7 @@ int main(void)
 	HAL_NVIC_EnableIRQ(DMA1_Stream6_IRQn);
 	HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
 	HAL_NVIC_EnableIRQ(DMA2_Stream7_IRQn);
-	BLE102_Init();
+	//BLE102_Init();
 	OLED_Init();
 
 	OLED_Clear();
@@ -128,34 +128,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-    
-    OLED_ShowChar(0, 0, 'A', 16);
-    OLED_ShowChar(0, 2, 'B', 16);
-    OLED_ShowChar(0, 4, 'C', 16);
-    OLED_ShowChar(0, 6, 'D', 16);
 
-    OLED_ShowChar(15, 0, 'A', 12);
-    OLED_ShowChar(15, 1, 'B', 12);
-    OLED_ShowChar(15, 2, 'C', 12);
-    OLED_ShowChar(15, 3, 'D', 12);
-    OLED_ShowChar(15, 4, 'E', 12);
-    OLED_ShowChar(15, 5, 'F', 12);
-    OLED_ShowChar(15, 6, 'G', 12);
-    OLED_ShowChar(15, 7, 'H', 12);
-
-    OLED_ShowString(30, 0, "mculover666", 12);
-
-    OLED_ShowCHinese(35, 2, 0);
-    OLED_ShowCHinese(65, 2, 1);
-    OLED_ShowCHinese(95, 2, 2);
-
-    OLED_ShowString(36, 6, "IoT Board", 16);
-
-    HAL_Delay(10);
-		//OLED_Clear();
-    //OLED_DrawBMP(0, 0, 128, 8,BMP1);
-
-    //HAL_Delay(1000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

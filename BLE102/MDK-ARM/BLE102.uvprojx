@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F411xE</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;          ../Drivers/STM32F4xx_HAL_Driver/Inc;          ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;          ../Drivers/CMSIS/Device/ST/STM32F4xx/Include;          ../Drivers/CMSIS/Include</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;..\BLE102</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -396,16 +396,6 @@
               <FileName>W25Q64.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\Src\W25Q64.c</FilePath>
-            </File>
-            <File>
-              <FileName>BLE102.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Core\Src\BLE102.c</FilePath>
-            </File>
-            <File>
-              <FileName>BLE102_text.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Core\Src\BLE102_text.c</FilePath>
             </File>
             <File>
               <FileName>oled.c</FileName>
@@ -561,6 +551,21 @@
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/system_stm32f4xx.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BLE102</GroupName>
+          <Files>
+            <File>
+              <FileName>BLE102_Use.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BLE102\BLE102_Use.c</FilePath>
+            </File>
+            <File>
+              <FileName>BLE102_Control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BLE102\BLE102_Control.c</FilePath>
             </File>
           </Files>
         </Group>
