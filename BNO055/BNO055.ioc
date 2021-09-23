@@ -1,6 +1,8 @@
 #MicroXplorer Configuration settings - do not modify
 File.Version=6
 GPIO.groupedBy=Group By Peripherals
+I2C1.DualAddressMode=I2C_DUALADDRESS_DISABLE
+I2C1.IPParameters=DualAddressMode
 KeepUserPlacement=false
 Mcu.Family=STM32F4
 Mcu.IP0=I2C1
