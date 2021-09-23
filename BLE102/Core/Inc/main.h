@@ -69,8 +69,8 @@ void Error_Handler(void);
 #define BLE102_RES_GPIO_Port GPIOA
 #define F_CS_Pin GPIO_PIN_4
 #define F_CS_GPIO_Port GPIOA
-#define LB102_MODE_Pin GPIO_PIN_1
-#define LB102_MODE_GPIO_Port GPIOB
+#define BLE102_WARK_Pin GPIO_PIN_1
+#define BLE102_WARK_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
