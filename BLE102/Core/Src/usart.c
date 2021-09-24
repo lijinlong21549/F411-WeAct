@@ -29,7 +29,7 @@
 #include "math.h"
 
 
-
+/*
 uint8_t UART1_Rx_flg = 0;                   //USART1接收完成标志
 uint8_t UART2_Rx_flg = 0;                   //USART2接收完成标志
 uint8_t UART1_receive_buff[255];						//串口1的缓存变量
@@ -193,6 +193,7 @@ void UART2_INT_REST()//重置中断数据缓存
 		UART2_Rx_cnt = 0;
 		UART2_Rx_flg = 0;
 }
+*/
 /*
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {

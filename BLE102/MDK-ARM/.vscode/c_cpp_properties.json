@@ -3,17 +3,15 @@
         {
             "name": "BLE102",
             "includePath": [
-                "f:\\Github\\F411-WeAct\\BLE102\\Core\\Inc",
-                "f:\\Github\\F411-WeAct\\BLE102\\Drivers\\STM32F4xx_HAL_Driver\\Inc",
-                "f:\\Github\\F411-WeAct\\BLE102\\Drivers\\STM32F4xx_HAL_Driver\\Inc\\Legacy",
-                "f:\\Github\\F411-WeAct\\BLE102\\Drivers\\CMSIS\\Device\\ST\\STM32F4xx\\Include",
-                "f:\\Github\\F411-WeAct\\BLE102\\Drivers\\CMSIS\\Include",
-                "f:\\Github\\F411-WeAct\\BLE102\\BLE102",
-                "E:\\Keil5\\ARM\\ARMCC\\include",
-                "E:\\Keil5\\ARM\\ARMCC\\include\\rw",
-                "f:\\Github\\F411-WeAct\\BLE102\\MDK-ARM",
-                "f:\\Github\\F411-WeAct\\BLE102\\Core\\Src",
-                "f:\\Github\\F411-WeAct\\BLE102\\Drivers\\STM32F4xx_HAL_Driver\\Src"
+                "h:\\Github\\F411-WeAct\\BLE102\\Core\\Inc",
+                "h:\\Github\\F411-WeAct\\BLE102\\Drivers\\STM32F4xx_HAL_Driver\\Inc",
+                "h:\\Github\\F411-WeAct\\BLE102\\Drivers\\STM32F4xx_HAL_Driver\\Inc\\Legacy",
+                "h:\\Github\\F411-WeAct\\BLE102\\Drivers\\CMSIS\\Device\\ST\\STM32F4xx\\Include",
+                "h:\\Github\\F411-WeAct\\BLE102\\Drivers\\CMSIS\\Include",
+                "h:\\Github\\F411-WeAct\\BLE102\\BLE102",
+                "h:\\Github\\F411-WeAct\\BLE102\\MDK-ARM",
+                "h:\\Github\\F411-WeAct\\BLE102\\Core\\Src",
+                "h:\\Github\\F411-WeAct\\BLE102\\Drivers\\STM32F4xx_HAL_Driver\\Src"
             ],
             "defines": [
                 "USE_HAL_DRIVER",

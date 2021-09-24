@@ -1,38 +1,40 @@
 #include "BLE102_Control.h"
-
+#include "BLE102_text.h"
+#include <string.h>
 Bluetooth_BLE102 BLE102_1;
-/*********************åˆå§‹åŒ–ç»“æ„ä½“*********************/
+/*********************³õÊ¼»¯½á¹¹Ìå*********************/
 int BLE102_Pretreatment(Bluetooth_BLE102 *BLE102)
 {
     BLE102->Wake_Pin = BLE102_WARK_Pin;
     BLE102->Wake_Prot = BLE102_WARK_GPIO_Port;
     BLE102->Reset_Pin = BLE102_RES_Pin;
-    BLE102->Reset_Pin = BLE102_RES_GPIO_Port;
+    BLE102->Reset_Prot = BLE102_RES_GPIO_Port;
     BLE102->UART_Aisle = huart2;
+    BLE102->Mode=BLE102_Mode_Slave;
 }
-/*********************DMAæ“ä½œ*********************/
-uint8_t BLE102_UART_Rx_flg = 0;        //USART1æ¥æ”¶å®Œæˆæ ‡å¿—
-uint8_t BLE102_UART_receive_buff[255]; //ä¸²å£çš„ç¼“å­˜å˜é‡
-int BLE102_UART_data_length;           //ä¸²å£1çš„æ•°æ®é•¿åº¦
-uint8_t BLE102_UART_TX_DMA_OVER = 0;   //USART1å‘é€å®Œæˆæ ‡å¿—
+/*********************DMA²Ù×÷*********************/
+uint8_t BLE102_UART_Rx_flg = 0;        //USART1½ÓÊÕÍê³É±êÖ¾
+uint8_t BLE102_UART_receive_buff[255]; //´®¿ÚµÄ»º´æ±äÁ¿
+int BLE102_UART_data_length;           //´®¿Ú1µÄÊı¾İ³¤¶È
+uint8_t BLE102_UART_TX_DMA_OVER = 0;   //USART1·¢ËÍÍê³É±êÖ¾
 
-//ä¸²å£2çš„DMAå‘é€å®Œæˆä¸­æ–­å‡½æ•°
-int BLE102_UASRT_DMA_OVER(Bluetooth_BLE102 *BLE102)
+//´®¿Ú2µÄDMA·¢ËÍÍê³ÉÖĞ¶Ïº¯Êı
+int BLE102_UASRT_DMA_OVER()
 {
     BLE102_UART_TX_DMA_OVER = 0;
     return BLE102_OK;
 }
-//ä¸²å£2çš„DMAå‘é€å‡½æ•°
+//´®¿Ú2µÄDMA·¢ËÍº¯Êı
 int BLE102_UASRT_DMA_printf(Bluetooth_BLE102 *BLE102, char *DATA)
 {
-    while (BLE102_UART_TX_DMA_OVER == 1) //åˆ¤æ–­å‘é€å®Œæˆæ ‡å¿—æ˜¯å¦ä¸º1
+    while (BLE102_UART_TX_DMA_OVER == 1) //ÅĞ¶Ï·¢ËÍÍê³É±êÖ¾ÊÇ·ñÎª1
     {
         HAL_Delay(10);
     }
 
     if (BLE102_UART_TX_DMA_OVER == 0)
     {
-        BLE102_UART_TX_DMA_OVER = 1; //å°†å‘é€æ ‡å¿—ç½®ä¸º0
+        BLE102_UART_TX_DMA_OVER = 1; //½«·¢ËÍ±êÖ¾ÖÃÎª0
         HAL_UART_Transmit_DMA(&(BLE102->UART_Aisle), (uint8_t *)DATA, strlen(DATA));
     }
     else
@@ -41,28 +43,28 @@ int BLE102_UASRT_DMA_printf(Bluetooth_BLE102 *BLE102, char *DATA)
     }
     return BLE102_OK;
 }
-//ä¸²å£2çš„ä¸­æ–­é‡è½½å‡½æ•°
+//´®¿Ú2µÄÖĞ¶ÏÖØÔØº¯Êı
 int BLE102_UASRT_Interrupt_reload(Bluetooth_BLE102 *BLE102)
 {
-    //æ¸…é›¶æ¥æ”¶ç¼“å†²åŒº
+    //ÇåÁã½ÓÊÕ»º³åÇø
     memset(BLE102_UART_receive_buff, 0, 255);
     BLE102_UART_data_length = 0;
-    //æ¸…é™¤æ¥æ”¶å®Œæˆæ ‡å¿—ä½
-    UART2_Rx_flg = 0;
-    //é‡å¯å¼€å§‹DMAä¼ è¾“ æ¯æ¬¡255å­—èŠ‚æ•°æ®
+    //Çå³ı½ÓÊÕÍê³É±êÖ¾Î»
+    BLE102_UART_Rx_flg = 0;
+    //ÖØÆô¿ªÊ¼DMA´«Êä Ã¿´Î255×Ö½ÚÊı¾İ
     HAL_UART_Receive_DMA(&(BLE102->UART_Aisle), (uint8_t *)BLE102_UART_receive_buff, 255);
 }
-//ä¸²å£2çš„ä¸­æ–­å¤„ç†å‡½æ•°
+//´®¿Ú2µÄÖĞ¶Ï´¦Àíº¯Êı
 int BLE102_UASRT_IDLECallback(Bluetooth_BLE102 *BLE102)
 {
-    //åœæ­¢æœ¬æ¬¡DMAä¼ è¾“
+    //Í£Ö¹±¾´ÎDMA´«Êä
     HAL_UART_DMAStop(&(BLE102->UART_Aisle));
 
-    //è®¡ç®—æ¥æ”¶åˆ°çš„æ•°æ®é•¿åº¦
+    //¼ÆËã½ÓÊÕµ½µÄÊı¾İ³¤¶È
     BLE102_UART_data_length = 255 - __HAL_DMA_GET_COUNTER((BLE102->UART_Aisle).hdmarx);
-    //å°†æ¥æ”¶å®Œæˆæ ‡å¿—ç½®1
+    //½«½ÓÊÕÍê³É±êÖ¾ÖÃ1
     BLE102_UART_Rx_flg = 1;
-    //æµ‹è¯•å‡½æ•°ï¼šå°†æ¥æ”¶åˆ°çš„æ•°æ®æ‰“å°å‡ºå»
+    //²âÊÔº¯Êı£º½«½ÓÊÕµ½µÄÊı¾İ´òÓ¡³öÈ¥
     //printf("Receive Data(length = %d): ",UART2_data_length);
     //HAL_UART_Transmit(&huart1,UART2_receive_buff,UART2_data_length,0x200);
     //printf("\r\n");
@@ -70,57 +72,149 @@ int BLE102_UASRT_IDLECallback(Bluetooth_BLE102 *BLE102)
 }
 int BLE102_UASRT_IRQHandler(Bluetooth_BLE102 *BLE102)
 {
-    //åˆ¤æ–­æ˜¯å¦æ˜¯ç©ºé—²ä¸­æ–­
+    //ÅĞ¶ÏÊÇ·ñÊÇ¿ÕÏĞÖĞ¶Ï
     if (RESET != __HAL_UART_GET_FLAG(&(BLE102->UART_Aisle), UART_FLAG_IDLE))
     {
-        //æ¸…æ¥šç©ºé—²ä¸­æ–­æ ‡å¿—ï¼ˆå¦åˆ™ä¼šä¸€ç›´ä¸æ–­è¿›å…¥ä¸­æ–­ï¼‰
+        //Çå³ş¿ÕÏĞÖĞ¶Ï±êÖ¾£¨·ñÔò»áÒ»Ö±²»¶Ï½øÈëÖĞ¶Ï£©
         __HAL_UART_CLEAR_IDLEFLAG(&(BLE102->UART_Aisle));
         //printf("\r\nUART1 Idle IQR Detected\r\n");
-        BLE102_UASRT_IDLECallback(&BLE102); //è°ƒç”¨ä¸­æ–­å¤„ç†å‡½æ•°
+        BLE102_UASRT_IDLECallback(&*BLE102); //µ÷ÓÃÖĞ¶Ï´¦Àíº¯Êı
     }
 }
 
-/*********************ä¸²å£æ“ä½œ*********************/
+/*********************´®¿Ú²Ù×÷*********************/
 /**
-  * @brief ä¸²å£è¯»å–
-  * @param BLE102ï¼šç›®æ ‡è®¾å¤‡
-  * @param DATAï¼šè¯»å–çš„æ•°æ®
-  * @param NUMï¼šè¯»å–æ•°æ®é•¿åº¦
-  * @retval è¯»å–æ˜¯å¦æˆåŠŸ
+  * @brief ´®¿Ú¶ÁÈ¡
+  * @param BLE102£ºÄ¿±êÉè±¸
+  * @param DATA£º¶ÁÈ¡µÄÊı¾İ
+  * @param NUM£º¶ÁÈ¡Êı¾İ³¤¶È
+  * @retval ¶ÁÈ¡ÊÇ·ñ³É¹¦
   */
 int BLE102_UART_Read(Bluetooth_BLE102 *BLE102, uint8_t *DATA, int NUM)
 {
-}
-/**
-  * @brief ä¸²å£å†™
-  * @param BLE102ï¼šç›®æ ‡è®¾å¤‡
-  * @param DATAï¼šå†™å…¥çš„æ•°æ®
-  * @retval å†™å…¥æ˜¯å¦æˆåŠŸ
-  */
-int BLE102_UART_Write(Bluetooth_BLE102 *BLE102, uint8_t *DATA)
-{
-    BLE102_UASRT_DMA_printf(*&BLE102, &*DATA);
     while (BLE102_UART_Rx_flg == 0)
     {
         HAL_Delay(1);
     }
-    HAL_Delay(500);
-    BLE102_UASRT_Interrupt_reload(&*BLE102); //é‡ç½®ä¸­æ–­æ•°æ®ç¼“å­˜
+    for (int i = 0; i < NUM; i++)
+    {
+        DATA[i] = BLE102_UART_receive_buff[i];
+    }
+    BLE102_UASRT_Interrupt_reload(&*BLE102);
 }
-/*********************ATæŒ‡ä»¤ç»“æ„ä½“*********************/
 /**
-  * @brief è¿›å…¥ATæŒ‡ä»¤æ¨¡å¼
-  * @param BLE102ï¼šç›®æ ‡è®¾å¤‡
-  * @retval æ˜¯å¦æˆåŠŸ
+  * @brief ´®¿ÚĞ´
+  * @param BLE102£ºÄ¿±êÉè±¸
+  * @param DATA£ºĞ´ÈëµÄÊı¾İ
+  * @retval Ğ´ÈëÊÇ·ñ³É¹¦
+  */
+int BLE102_UART_Write(Bluetooth_BLE102 *BLE102, uint8_t *DATA)
+{
+    while (BLE102_UART_TX_DMA_OVER == 1) //ÅĞ¶Ï·¢ËÍÍê³É±êÖ¾ÊÇ·ñÎª1
+    {
+        HAL_Delay(10);
+    }
+    if (BLE102_UART_TX_DMA_OVER == 0)
+    {
+        BLE102_UART_TX_DMA_OVER = 1; //½«·¢ËÍ±êÖ¾ÖÃÎª0
+        HAL_UART_Transmit_DMA(&huart2, (uint8_t *)DATA, strlen((char *)DATA));
+    }
+}
+/*********************ATÖ¸Áî½á¹¹Ìå*********************/
+/**
+  * @brief ½øÈëATÖ¸ÁîÄ£Ê½
+  * @param BLE102£ºÄ¿±êÉè±¸
+  * @retval ÊÇ·ñ³É¹¦
   */
 int BLE102_AT_In(Bluetooth_BLE102 *BLE102)
 {
+    uint8_t DATA[3] = "+++";
+    BLE102_UART_Write(&*BLE102, DATA);
+    uint8_t DATA_IN[1] = {0};
+    BLE102_UART_Read(&*BLE102, DATA_IN, 1);
+    if (DATA_IN[0] == 'a')
+    {
+        uint8_t DATAOUT[1] = "a";
+        BLE102_UART_Write(&*BLE102, DATAOUT);
+    }
+    else
+    {
+        return BLE102_Error;
+    }
+    uint8_t DATA_AT_OUT[5] = "+ok\r\n";
+    uint8_t DATA_AT[5] = {0};
+    BLE102_UART_Read(&*BLE102, DATA_AT, 5);
+    if (StringComparison(DATA_AT_OUT, DATA_AT, 5) == 1)
+    {
+        printf("½øÈëATÄ£Ê½\r\n");
+        BLE102->AT_Mode = BLE102_AT_Order;
+        return BLE102_OK;
+    }
+    else
+    {
+        return BLE102_Error;
+    }
 }
 /**
-  * @brief é€€å‡ºATæŒ‡ä»¤æ¨¡å¼
-  * @param BLE102ï¼šç›®æ ‡è®¾å¤‡
-  * @retval æ˜¯å¦æˆåŠŸ
+  * @brief ÍË³öATÖ¸ÁîÄ£Ê½
+  * @param BLE102£ºÄ¿±êÉè±¸
+  * @retval ÊÇ·ñ³É¹¦
   */
 int BLE102_AT_Out(Bluetooth_BLE102 *BLE102)
 {
+    uint8_t DATA_OUT[9] = "AT+ENTM\r\n";
+    BLE102_UART_Write(&*BLE102, DATA_OUT);
+
+    uint8_t DATA_AT_OUT[16] = "\r\n+ENTM:OK\r\nOK\r\n";
+    uint8_t DATA_AT[16] = {0};
+    BLE102_UART_Read(&*BLE102, DATA_AT, 16);
+    if (StringComparison(DATA_AT_OUT, DATA_AT, 16) == 1)
+    {
+        printf("ÍË³öATÄ£Ê½\r\n");
+        BLE102->AT_Mode = BLE102_AT_DATA;
+    }
+}
+/**
+  * @brief ATÄ£Ê½¼ìÑé£¬²é¿´ÊÇ·ñÔÚÃüÁîÄ£Ê½£¬Èç¹û²»ÔÚÔò½øÈëATÄ£Ê½
+  * @param BLE102£ºÄ¿±êÉè±¸
+  * @retval ÊÇ·ñ³É¹¦
+  */
+int BLE102_judge_AT_MODE(Bluetooth_BLE102 *BLE102)
+{
+    if (BLE102->AT_Mode == BLE102_AT_DATA)
+    {
+        if(BLE102_AT_In(&*BLE102)!=BLE102_OK)
+        {
+            return BLE102_Error;
+        }
+        else
+        {
+            return BLE102_OK;
+        }
+    }
+}
+/**
+  * @brief Ó²¼ş¸´Î»BLE102
+  * @param BLE102£ºÄ¿±êÉè±¸
+  * @retval ÊÇ·ñ³É¹¦
+  */
+int BLE102_HardRest(Bluetooth_BLE102 *BLE102)
+{
+    BLE102_UASRT_Interrupt_reload(&*BLE102); //ÖØÖÃÖĞ¶ÏÊı¾İ»º´æ
+    //Ó²¼ş¸´Î»
+    HAL_GPIO_WritePin(BLE102->Reset_Prot, BLE102->Reset_Pin, GPIO_PIN_RESET);
+    HAL_Delay(300);
+    HAL_GPIO_WritePin(BLE102->Reset_Prot, BLE102->Reset_Pin, GPIO_PIN_SET);
+
+    //À­¸ß»½ĞÑÒı½Å
+    HAL_GPIO_WritePin(BLE102->Wake_Prot, BLE102->Wake_Pin, GPIO_PIN_RESET);
+    while (BLE102_UART_Rx_flg == 0)
+    {
+        HAL_Delay(1);
+    }
+    if (BLE102_UART_Rx_flg)
+    {
+        BLE102_UASRT_Interrupt_reload(&*BLE102); //ÖØÖÃÖĞ¶ÏÊı¾İ»º´æ
+    }
+    HAL_Delay(500);
 }

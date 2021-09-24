@@ -157,23 +157,23 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>62</LineNumber>
+          <LineNumber>145</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134233840</Address>
+          <Address>134218570</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>../Core/Src/usart.c</Filename>
+          <Filename>..\BLE102\BLE102_Control.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\BLE102\../Core/Src/usart.c\62</Expression>
+          <Expression>\\BLE102\../BLE102/BLE102_Control.c\145</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>201</LineNumber>
+          <LineNumber>62</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -182,7 +182,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>H:\Github\F411-WeAct\BLE102\Core\Src\BLE102.c</Filename>
+          <Filename>../Core/Src/usart.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -197,6 +197,11 @@
           <count>1</count>
           <WinNumber>1</WinNumber>
           <ItemText>DATA</ItemText>
+        </Ww>
+        <Ww>
+          <count>2</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>BLE102_UART_receive_buff</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
@@ -682,6 +687,18 @@
       <bDave2>0</bDave2>
       <PathWithFileName>..\BLE102\BLE102_Control.c</PathWithFileName>
       <FilenameWithoutPath>BLE102_Control.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>5</GroupNumber>
+      <FileNumber>34</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\BLE102\BLE102_text.c</PathWithFileName>
+      <FilenameWithoutPath>BLE102_text.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

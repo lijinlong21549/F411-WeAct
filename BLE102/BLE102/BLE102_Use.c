@@ -1,17 +1,125 @@
-#include "BLE102_Control.h"
 #include "BLE102_Use.h"
+#include "BLE102_text.h"
+#include <string.h>
+/**
+  * @brief ÉèÖÃÄ£¿éÃû³Æ
+  * @param BLE102£ºÄ¿±êÉè±¸
+  * @param BLE102_NAME£ºÃû³Æ
+  * @retval ÉèÖÃÊÇ·ñ³É¹¦
+  */
+int BLE102_Witer_Name(Bluetooth_BLE102 *BLE102, uint8_t *BLE102_NAME)
+{
+		//¼ìÑéÊÇ·ñÔÚATÄ£Ê½
+		BLE102_judge_AT_MODE(&*BLE102);
+    //·¢ËÍÃû³Æ
+    uint8_t DATA[10 + 15] = "AT+NAME=";
+    strcat((char *)DATA, (char *)BLE102_NAME);
+    strcat((char *)DATA, (char *)"\r\n");
+    BLE102_UART_Write(&*BLE102, DATA);
+    //¶ÁÈ¡»ØÓ¦
+    uint8_t DATA_CRC[13 + 15] = "\r\n+NAME:";
+    uint8_t DATA_IN[13 + 15] = {0};
+    strcat((char *)DATA_CRC, (char *)BLE102_NAME);
+    strcat((char *)DATA_CRC, (char *)"\r\nOK\r\n");
 
+    BLE102_UART_Read(&*BLE102, DATA_IN, 13 + 15);
+    if (StringComparison(DATA_IN, DATA_CRC, 13 + 15) == 1)
+    {
+        for (int i = 0; i < 15; i++)
+        {
+            BLE102->NAME[i] = BLE102_NAME[i];
+        }
+        //printf("Ãû×ÖÉèÖÃ³É¹¦ \r\n");
+        return BLE102_OK;
+    }
+    else
+    {
+        return BLE102_Error;
+    }
+}
+/**
+  * @brief ÉèÖÃÄ£¿é¹¤×÷Ä£Ê½
+  * @param BLE102£ºÄ¿±êÉè±¸
+  * @retval ÉèÖÃÊÇ·ñ³É¹¦
+  */
+int BLE102_Witer_MODE(Bluetooth_BLE102 *BLE102)
+{
+		//¼ìÑéÊÇ·ñÔÚATÄ£Ê½
+		BLE102_judge_AT_MODE(&*BLE102);
+    uint8_t DATA[11] = "AT+MODE=";
+    if (BLE102->Mode == BLE102_Mode_Mast)
+    {
+        strcat((char *)DATA, (char *)"M\r\n");
+    }
+    else if (BLE102->Mode == BLE102_Mode_Slave)
+    {
+        strcat((char *)DATA, (char *)"S\r\n");
+    }
+    else if (BLE102->Mode == BLE102_Mode_iBeacon)
+    {
+        strcat((char *)DATA, (char *)"B\r\n");
+    }
+    else if (BLE102->Mode == BLE102_Mode_Mesh)
+    {
+        strcat((char *)DATA, (char *)"F\r\n");
+    }
+    else
+    {
+        return BLE102_Error;
+    }
+    BLE102_UART_Write(&*BLE102, DATA);
+    //Ğ£Ñé»ØÓ¦
+    uint8_t DATA_CRC[14 + 7] = "\r\n+MODE:";
+    if (BLE102->Mode == BLE102_Mode_Mast)
+    {
+        strcat((char *)DATA_CRC, (char *)"Mast\r\nOK/r/n");
+    }
+    else if (BLE102->Mode == BLE102_Mode_Slave)
+    {
+        strcat((char *)DATA, (char *)"Slave\r\nOK/r/n");
+    }
+    else if (BLE102->Mode == BLE102_Mode_iBeacon)
+    {
+        strcat((char *)DATA, (char *)"iBeacon\r\nOK/r/n");
+    }
+    else if (BLE102->Mode == BLE102_Mode_Mesh)
+    {
+        strcat((char *)DATA, (char *)"Mesh\r\nOK/r/n");
+    }
+    else
+    {
+        return BLE102_Error;
+    }
+    uint8_t DATA_IN[14 + 7] = {0};
+    BLE102_UART_Read(&*BLE102, DATA_IN, 14 + 7);
+    if (StringComparison(DATA_IN, DATA_CRC, 14 + 7) == 1)
+    {
+        //printf("Ä£Ê½ÉèÖÃ³É¹¦ \r\n");
+        return BLE102_OK;
+    }
+    else
+    {
+        return BLE102_Error;
+    }
+    //µÈ´ı¿ª»ú¶ÁÈ¡¿ª»ú»¶Ó­Óï
+    uint8_t DATA_Boot_up[20];
+    BLE102_UART_Read(&*BLE102, DATA_Boot_up, 20);
+		BLE102->AT_Mode=BLE102_AT_DATA;
+}
 int BLE102_Init(Bluetooth_BLE102 *BLE102)
 {
-    printf("BLE102åˆå§‹åŒ–ï¼š \r\n");
-    //å¼€å¯ä¸²å£ä¸­æ–­
+    printf("BLE102³õÊ¼»¯£º \r\n");
+    //³õÊ¼»¯½á¹¹Ìå
+    BLE102_Pretreatment(&*BLE102);
+    //¿ªÆô´®¿ÚÖĞ¶Ï
     __HAL_UART_ENABLE_IT(&(BLE102->UART_Aisle), UART_IT_IDLE);
-    //ç¡¬ä»¶å¤ä½
-    HAL_GPIO_WritePin(BLE102->Reset_Prot, BLE102->Reset_Pin, GPIO_PIN_RESET);
-    HAL_Delay(300);
-    HAL_GPIO_WritePin(BLE102->Reset_Prot, BLE102->Reset_Pin, GPIO_PIN_SET);
-    //æ‹‰é«˜å”¤é†’å¼•è„š
-    HAL_GPIO_WritePin(BLE102->Wake_Prot, BLE102->Wake_Pin, GPIO_PIN_SET);
-    //è¿›å…¥ATæŒ‡ä»¤æ¨¡å¼
-    
+    //Ó²¼ş¸´Î»BLE102
+    BLE102_HardRest(&*BLE102);
+    //½øÈëATÖ¸ÁîÄ£Ê½
+    printf("¿ªÊ¼½øÈëATÖ¸ÁîÄ£Ê½\r\n");
+    BLE102_AT_In(&*BLE102);
+    uint8_t BLE102_NAME[15] = "LED_Commander";
+    BLE102_Witer_Name(&*BLE102, BLE102_NAME);
+    BLE102_Witer_MODE(&*BLE102);
+    //BLE102_AT_Out(&*BLE102);
 }

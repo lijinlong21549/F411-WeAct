@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "stdarg.h"
 #include "math.h"
+
 //返回值
 #define BLE102_OK 0
 #define BLE102_Error 1
@@ -14,7 +15,7 @@
 struct BLE102_ADP
 {
     //模块是否进行广播
-    int ADP;
+    int ADP_EN;
     //模块的自定义广播速度 10-1024
     int ADPTIM;
 };
@@ -95,6 +96,9 @@ struct BLE102_Usart
 //数据加密传输
 #define BLE102_TRENC_ON 1  //使能
 #define BLE102_TRENC_OFF 0 //禁止
+//AT模式
+#define BLE102_AT_Order 1//命令模式
+#define BLE102_AT_DATA 0//数据模式
 typedef struct __BLE102
 {
     //复位
@@ -105,11 +109,11 @@ typedef struct __BLE102
     GPIO_TypeDef *Wake_Prot;
     //所使用的串口通道
     UART_HandleTypeDef UART_Aisle;
+	
     //AT配置模式
     uint8_t AT_Mode;
     //模块名称
     uint8_t NAME[15];
-
     //设备工作模式
     uint8_t Mode;
     //BLE102的MAC地址
@@ -139,12 +143,22 @@ typedef struct __BLE102
     //是否使能数据加密传输
     int BLE102_TRENC;
     //嵌套结构体
+		
     struct BLE102_Usart Usart;
     struct BLE102_Link Link;
+    struct BLE102_SCAN SCAN;
+    struct BLE102_ADP ADP;
 } Bluetooth_BLE102;
 
 
 //函数
 extern Bluetooth_BLE102 BLE102_1;
+
 int BLE102_Pretreatment(Bluetooth_BLE102 *BLE102);
 int BLE102_UASRT_IRQHandler(Bluetooth_BLE102 *BLE102);
+int BLE102_UASRT_Interrupt_reload(Bluetooth_BLE102 *BLE102);
+int BLE102_UASRT_DMA_OVER();
+int BLE102_AT_In(Bluetooth_BLE102 *BLE102);
+int BLE102_HardRest(Bluetooth_BLE102 *BLE102);
+int BLE102_AT_Out(Bluetooth_BLE102 *BLE102);
+int BLE102_judge_AT_MODE(Bluetooth_BLE102 *BLE102);

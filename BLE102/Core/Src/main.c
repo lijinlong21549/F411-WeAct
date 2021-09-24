@@ -28,9 +28,10 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "W25Q64.h"
-#include "BLE102.h"
 #include "oled.h"
-#include "BLE102.h"
+#include "BLE102_Use.h"
+//#include "BLE102_Control.h"
+
 #include "bmp.h"
 /* USER CODE END Includes */
 
@@ -110,8 +111,7 @@ int main(void)
 	W25Qx_Init();
 	printf("初始化SPI flash成功 \r\n");
 	//W25Qx_test();
-	USAR1_Interrupt_reload();
-	USAR2_Interrupt_reload();
+	BLE102_UASRT_Interrupt_reload(&BLE102_1);
 	HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
 	HAL_NVIC_EnableIRQ(DMA1_Stream6_IRQn);
 	HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
@@ -120,6 +120,7 @@ int main(void)
 	OLED_Init();
 
 	OLED_Clear();
+	BLE102_Init(&BLE102_1);
   /* USER CODE END 2 */
 
   /* Infinite loop */

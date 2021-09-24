@@ -32,6 +32,7 @@
 "ble102\system_stm32f4xx.o"
 "ble102\ble102_use.o"
 "ble102\ble102_control.o"
+"ble102\ble102_text.o"
 --library_type=microlib --strict --scatter "BLE102\BLE102.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
