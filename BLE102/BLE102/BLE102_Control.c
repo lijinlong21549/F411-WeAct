@@ -105,7 +105,7 @@ int BLE102_UART_Write(Bluetooth_BLE102 *BLE102, uint8_t *DATA)
         HAL_Delay(1);
     }
     HAL_Delay(500);
-    BLE102_UASRT_Interrupt_reload(); //重置中断数据缓存
+    BLE102_UASRT_Interrupt_reload(&*BLE102); //重置中断数据缓存
 }
 /*********************AT指令结构体*********************/
 /**
