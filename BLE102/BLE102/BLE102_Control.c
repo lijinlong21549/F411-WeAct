@@ -10,7 +10,17 @@ int BLE102_Pretreatment(Bluetooth_BLE102 *BLE102)
     BLE102->Reset_Pin = BLE102_RES_Pin;
     BLE102->Reset_Prot = BLE102_RES_GPIO_Port;
     BLE102->UART_Aisle = huart2;
+    //工作模式
     BLE102->Mode=BLE102_Mode_Slave;
+    //模块名称
+    strcpy(BLE102->NAME,"LED_Commander");
+    //模块密码
+    strcpy(BLE102->PASS,"123456");
+    //串口参数
+    BLE102->Usart.Baud_rate=BLE102_Baud_Rate_57600;
+    BLE102->Usart.Data_Bit=BLE102_Data_Bit_8;
+    BLE102->Usart.Test_Bit=BLE102_Test_Bit_NO;
+    BLE102->Usart.Stop_Bit=BLE102_Stop_Bit_1;
 }
 /*********************DMA操作*********************/
 uint8_t BLE102_UART_Rx_flg = 0;        //USART1接收完成标志

@@ -15,8 +15,7 @@ extern "C" {
 #include "stdarg.h"
 #include "math.h"
 
-//extern uint8_t String_Intercept_DATA_return[255];//返回数据
-//extern int String_Intercept_DATA_long;//数据长度
+
 
 /**
   * @brief  通过关键字开始截取一段文本的内容
@@ -157,6 +156,8 @@ int StringComparison(uint8_t* DATA,uint8_t* pDATA,int NUM)
 * @param	DATA_STOP：数据停止字符
 * @retval 空值
 */
+//extern uint8_t String_Intercept_DATA_return[255];//返回数据
+//extern int String_Intercept_DATA_long;//数据长度
 /*
 void String_Intercept(uint8_t DATA[255],int DATA_begin_long,uint8_t DATA_STOP[1])
 {	

@@ -44,6 +44,7 @@ struct BLE102_Link
 //波特率
 #define BLE102_Baud_Rate_1200 1200
 #define BLE102_Baud_Rate_9600 9600
+#define BLE102_Baud_Rate_57600 57600
 #define BLE102_Baud_Rate_115200 115200
 #define BLE102_Baud_Rate_512000 512000
 #define BLE102_Baud_Rate_921600 921600
