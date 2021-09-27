@@ -163,3 +163,5 @@ int BLE102_AT_In(Bluetooth_BLE102 *BLE102);
 int BLE102_HardRest(Bluetooth_BLE102 *BLE102);
 int BLE102_AT_Out(Bluetooth_BLE102 *BLE102);
 int BLE102_judge_AT_MODE(Bluetooth_BLE102 *BLE102);
+int BLE102_UART_Read(Bluetooth_BLE102 *BLE102, uint8_t *DATA, int NUM);
+int BLE102_UART_Write(Bluetooth_BLE102 *BLE102, uint8_t *DATA);

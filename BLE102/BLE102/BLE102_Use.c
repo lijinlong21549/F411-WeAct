@@ -1,7 +1,11 @@
 #include "BLE102_Use.h"
 #include "BLE102_text.h"
 #include <string.h>
-
+/**
+  * @brief 设置模块密码
+  * @param BLE102：目标设备
+  * @retval 设置是否成功
+  */
 /**
   * @brief 设置模块密码
   * @param BLE102：目标设备
@@ -9,6 +13,8 @@
   */
 int BLE102_Witer_Pass(Bluetooth_BLE102 *BLE102)
 {
+    //检验是否在AT模式
+    BLE102_judge_AT_MODE(&*BLE102);
     uint8_t DATA_OUT[10 + 6] = "AT+PASS=";
     strcat((char *)DATA_OUT, (char *)BLE102->PASS);
     strcat((char *)DATA_OUT, (char *)"\r\n");
@@ -34,6 +40,8 @@ int BLE102_Witer_Pass(Bluetooth_BLE102 *BLE102)
   */
 int BLE102_Read_MAC(Bluetooth_BLE102 *BLE102)
 {
+    //检验是否在AT模式
+    BLE102_judge_AT_MODE(&*BLE102);
     uint8_t DATA_OUT[9] = "AT+MAC?\r\n";
     BLE102_UART_Write(&*BLE102, DATA_OUT);
     uint8_t DATA_IN[13 + 12] = {0};
@@ -132,16 +140,20 @@ int BLE102_Witer_MODE(Bluetooth_BLE102 *BLE102)
     if (StringComparison(DATA_IN, DATA_CRC, 14 + 7) == 1)
     {
         //printf("模式设置成功 \r\n");
-        return BLE102_OK;
+        
     }
     else
     {
         return BLE102_Error;
     }
     //等待开机读取开机欢迎语
+		HAL_Delay(200);
     uint8_t DATA_Boot_up[20];
     BLE102_UART_Read(&*BLE102, DATA_Boot_up, 20);
     BLE102->AT_Mode = BLE102_AT_DATA;
+		HAL_Delay(500);
+		return BLE102_OK;
+
 }
 int BLE102_Init(Bluetooth_BLE102 *BLE102)
 {
@@ -157,5 +169,7 @@ int BLE102_Init(Bluetooth_BLE102 *BLE102)
     BLE102_AT_In(&*BLE102);
     BLE102_Witer_Name(&*BLE102);
     BLE102_Witer_MODE(&*BLE102);
+    BLE102_Read_MAC(&*BLE102);
+		BLE102_Witer_Pass(&*BLE102);
     //BLE102_AT_Out(&*BLE102);
 }

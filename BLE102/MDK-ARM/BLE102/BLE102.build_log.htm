@@ -5,175 +5,73 @@
 <h2>Tool Versions:</h2>
 IDE-Version: ¦ÌVision V5.29.0.0
 Copyright (C) 2019 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information:  ,  , LIC=ATTQ1-CXN9N-Y8DFK-ZKPID-RZ7P9-4KWGQ
+License Information: Administrator,  , LIC=47GU5-GQLMK-DY8V3-A0MUC-I2FWP-VULZ1
  
 Tool Versions:
-Toolchain:       MDK-ARM Plus  Version: 5.29.0.0
-Toolchain Path:  E:\Keil5\ARM\ARMCC\Bin
+Toolchain:       MDK-ARM Plus  Version: 5.27.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
 C Compiler:      Armcc.exe V5.06 update 6 (build 750)
 Assembler:       Armasm.exe V5.06 update 6 (build 750)
 Linker/Locator:  ArmLink.exe V5.06 update 6 (build 750)
 Library Manager: ArmAr.exe V5.06 update 6 (build 750)
 Hex Converter:   FromElf.exe V5.06 update 6 (build 750)
-CPU DLL:         SARMCM3.DLL V5.29.0.0
-Dialog DLL:      DCM.DLL V1.17.3.0
-Target DLL:      CMSIS_AGDI.dll V1.32.0.0
-Dialog DLL:      TCM.DLL V1.36.5.0
+CPU DLL:         SARMCM3.DLL V5.27.0.0
+Dialog DLL:      DCM.DLL V1.17.2.0
+Target DLL:      CMSIS_AGDI.dll V1.31.9.0
+Dialog DLL:      TCM.DLL V1.36.1.0
  
 <h2>Project:</h2>
-F:\Github\F411-WeAct\BLE102\MDK-ARM\BLE102.uvprojx
-Project File Date:  09/24/2021
+H:\Github\F411-WeAct\BLE102\MDK-ARM\BLE102.uvprojx
+Project File Date:  09/25/2021
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\Keil5\ARM\ARMCC\Bin'
+*** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'BLE102'
-assembling startup_stm32f411xe.s...
-compiling W25Q64.c...
-compiling dma.c...
-compiling spi.c...
-compiling i2c.c...
-compiling stm32f4xx_hal_msp.c...
-compiling gpio.c...
-compiling stm32f4xx_it.c...
-../Core/Inc/usart.h(54): warning:  #1295-D: Deprecated declaration USART1_DMA_OVER - give arg types
-  void USART1_DMA_OVER();
-../Core/Inc/usart.h(55): warning:  #1295-D: Deprecated declaration USART2_DMA_OVER - give arg types
-  void USART2_DMA_OVER();
-..\BLE102\BLE102_Control.h(160): warning:  #1295-D: Deprecated declaration BLE102_UASRT_DMA_OVER - give arg types
-  int BLE102_UASRT_DMA_OVER();
-..\BLE102\BLE102_Control.h(164): warning:  #1-D: last line of file ends without a newline
-  int BLE102_judge_AT_MODE(Bluetooth_BLE102 *BLE102);
-../Core/Src/stm32f4xx_it.c: 4 warnings, 0 errors
-compiling usart.c...
-../Core/Inc/usart.h(54): warning:  #1295-D: Deprecated declaration USART1_DMA_OVER - give arg types
-  void USART1_DMA_OVER();
-../Core/Inc/usart.h(55): warning:  #1295-D: Deprecated declaration USART2_DMA_OVER - give arg types
-  void USART2_DMA_OVER();
-../Core/Src/usart.c: 2 warnings, 0 errors
-compiling oled.c...
-compiling main.c...
-../Core/Inc/usart.h(54): warning:  #1295-D: Deprecated declaration USART1_DMA_OVER - give arg types
-  void USART1_DMA_OVER();
-../Core/Inc/usart.h(55): warning:  #1295-D: Deprecated declaration USART2_DMA_OVER - give arg types
-  void USART2_DMA_OVER();
-..\BLE102\BLE102_Control.h(160): warning:  #1295-D: Deprecated declaration BLE102_UASRT_DMA_OVER - give arg types
-  int BLE102_UASRT_DMA_OVER();
-..\BLE102\BLE102_Control.h(164): warning:  #1-D: last line of file ends without a newline
-  int BLE102_judge_AT_MODE(Bluetooth_BLE102 *BLE102);
-..\BLE102\BLE102_Use.h(10): warning:  #1-D: last line of file ends without a newline
-  int BLE102_Init(Bluetooth_BLE102 *BLE102);
-../Core/Src/main.c: 5 warnings, 0 errors
-compiling stm32f4xx_hal_i2c.c...
-compiling stm32f4xx_hal_i2c_ex.c...
-compiling stm32f4xx_hal_flash.c...
-compiling stm32f4xx_hal_rcc_ex.c...
-compiling stm32f4xx_hal_flash_ex.c...
-compiling stm32f4xx_hal_rcc.c...
-compiling stm32f4xx_hal_gpio.c...
-compiling stm32f4xx_hal_pwr_ex.c...
-compiling stm32f4xx_hal_pwr.c...
-compiling stm32f4xx_hal_flash_ramfunc.c...
-compiling stm32f4xx_hal_dma.c...
-compiling stm32f4xx_hal_dma_ex.c...
-compiling stm32f4xx_hal_cortex.c...
-compiling stm32f4xx_hal.c...
-compiling stm32f4xx_hal_exti.c...
-compiling stm32f4xx_hal_spi.c...
-compiling stm32f4xx_hal_tim.c...
-compiling system_stm32f4xx.c...
-compiling stm32f4xx_hal_tim_ex.c...
-compiling BLE102_text.c...
-../Core/Inc/usart.h(54): warning:  #1295-D: Deprecated declaration USART1_DMA_OVER - give arg types
-  void USART1_DMA_OVER();
-../Core/Inc/usart.h(55): warning:  #1295-D: Deprecated declaration USART2_DMA_OVER - give arg types
-  void USART2_DMA_OVER();
-..\BLE102\BLE102_text.c(195): warning:  #1-D: last line of file ends without a newline
-  #endif /* __BLE102_text_H__ */
-..\BLE102\BLE102_text.c: 3 warnings, 0 errors
 compiling BLE102_Use.c...
 ../Core/Inc/usart.h(54): warning:  #1295-D: Deprecated declaration USART1_DMA_OVER - give arg types
   void USART1_DMA_OVER();
 ../Core/Inc/usart.h(55): warning:  #1295-D: Deprecated declaration USART2_DMA_OVER - give arg types
   void USART2_DMA_OVER();
-..\BLE102\BLE102_Control.h(160): warning:  #1295-D: Deprecated declaration BLE102_UASRT_DMA_OVER - give arg types
+..\BLE102\BLE102_Control.h(161): warning:  #1295-D: Deprecated declaration BLE102_UASRT_DMA_OVER - give arg types
   int BLE102_UASRT_DMA_OVER();
-..\BLE102\BLE102_Control.h(164): warning:  #1-D: last line of file ends without a newline
-  int BLE102_judge_AT_MODE(Bluetooth_BLE102 *BLE102);
+..\BLE102\BLE102_Control.h(167): warning:  #1-D: last line of file ends without a newline
+  int BLE102_UART_Write(Bluetooth_BLE102 *BLE102, uint8_t *DATA);
 ..\BLE102\BLE102_Use.h(10): warning:  #1-D: last line of file ends without a newline
   int BLE102_Init(Bluetooth_BLE102 *BLE102);
-..\BLE102\BLE102_Use.c(18): warning:  #223-D: function "BLE102_UART_Write" declared implicitly
-      BLE102_UART_Write(&*BLE102, DATA);
-..\BLE102\BLE102_Use.c(25): warning:  #223-D: function "BLE102_UART_Read" declared implicitly
-      BLE102_UART_Read(&*BLE102, DATA_IN, 13 + 15);
-..\BLE102\BLE102_Use.c(70): warning:  #223-D: function "BLE102_UART_Write" declared implicitly
-      BLE102_UART_Write(&*BLE102, DATA);
-..\BLE102\BLE102_Use.c(94): warning:  #223-D: function "BLE102_UART_Read" declared implicitly
-      BLE102_UART_Read(&*BLE102, DATA_IN, 14 + 7);
-..\BLE102\BLE102_Use.c(106): warning:  #111-D: statement is unreachable
-      BLE102_UART_Read(&*BLE102, DATA_Boot_up, 20);
-..\BLE102\BLE102_Use.c(125): warning:  #1-D: last line of file ends without a newline
+..\BLE102\BLE102_Use.c(49): warning:  #940-D: missing return statement at end of non-void function "BLE102_Read_MAC" 
   }
-..\BLE102\BLE102_Use.c(125): warning:  #940-D: missing return statement at end of non-void function "BLE102_Init" 
+..\BLE102\BLE102_Use.c(171): warning:  #1-D: last line of file ends without a newline
   }
-..\BLE102\BLE102_Use.c: 12 warnings, 0 errors
-compiling BLE102_Control.c...
-../Core/Inc/usart.h(54): warning:  #1295-D: Deprecated declaration USART1_DMA_OVER - give arg types
-  void USART1_DMA_OVER();
-../Core/Inc/usart.h(55): warning:  #1295-D: Deprecated declaration USART2_DMA_OVER - give arg types
-  void USART2_DMA_OVER();
-..\BLE102\BLE102_Control.h(160): warning:  #1295-D: Deprecated declaration BLE102_UASRT_DMA_OVER - give arg types
-  int BLE102_UASRT_DMA_OVER();
-..\BLE102\BLE102_Control.h(164): warning:  #1-D: last line of file ends without a newline
-  int BLE102_judge_AT_MODE(Bluetooth_BLE102 *BLE102);
-..\BLE102\BLE102_Control.c(14): warning:  #940-D: missing return statement at end of non-void function "BLE102_Pretreatment" 
+..\BLE102\BLE102_Use.c(171): warning:  #940-D: missing return statement at end of non-void function "BLE102_Init" 
   }
-..\BLE102\BLE102_Control.c(56): warning:  #940-D: missing return statement at end of non-void function "BLE102_UASRT_Interrupt_reload" 
-  }
-..\BLE102\BLE102_Control.c(72): warning:  #940-D: missing return statement at end of non-void function "BLE102_UASRT_IDLECallback" 
-  }
-..\BLE102\BLE102_Control.c(83): warning:  #940-D: missing return statement at end of non-void function "BLE102_UASRT_IRQHandler" 
-  }
-..\BLE102\BLE102_Control.c(104): warning:  #940-D: missing return statement at end of non-void function "BLE102_UART_Read" 
-  }
-..\BLE102\BLE102_Control.c(122): warning:  #940-D: missing return statement at end of non-void function "BLE102_UART_Write" 
-  }
-..\BLE102\BLE102_Control.c(176): warning:  #940-D: missing return statement at end of non-void function "BLE102_AT_Out" 
-  }
-..\BLE102\BLE102_Control.c(195): warning:  #940-D: missing return statement at end of non-void function "BLE102_judge_AT_MODE" 
-  }
-..\BLE102\BLE102_Control.c(220): warning:  #1-D: last line of file ends without a newline
-  }
-..\BLE102\BLE102_Control.c(220): warning:  #940-D: missing return statement at end of non-void function "BLE102_HardRest" 
-  }
-..\BLE102\BLE102_Control.c: 14 warnings, 0 errors
-compiling stm32f4xx_hal_uart.c...
+..\BLE102\BLE102_Use.c: 8 warnings, 0 errors
 linking...
-Program Size: Code=14460 RO-data=900 RW-data=32 ZI-data=2672  
+Program Size: Code=14772 RO-data=924 RW-data=32 ZI-data=2672  
 FromELF: creating hex file...
-"BLE102\BLE102.axf" - 0 Error(s), 40 Warning(s).
+"BLE102\BLE102.axf" - 0 Error(s), 8 Warning(s).
 
 <h2>Software Packages used:</h2>
 
 Package Vendor: ARM
-                http://www.keil.com/pack/ARM.CMSIS.5.6.0.pack
-                ARM.CMSIS.5.6.0
+                http://www.keil.com/pack/ARM.CMSIS.5.4.0.pack
+                ARM.CMSIS.5.4.0
                 CMSIS (Cortex Microcontroller Software Interface Standard)
-   * Component: CORE Version: 5.3.0
+   * Component: CORE Version: 5.1.2
 
 Package Vendor: Keil
-                http://www.keil.com/pack/Keil.STM32F4xx_DFP.2.14.0.pack
-                Keil.STM32F4xx_DFP.2.14.0
+                http://www.keil.com/pack/Keil.STM32F4xx_DFP.2.15.0.pack
+                Keil.STM32F4xx_DFP.2.15.0
                 STMicroelectronics STM32F4 Series Device Support, Drivers and Examples
 
 <h2>Collection of Component include folders:</h2>
   .\RTE\_BLE102
-  E:\Keil5pack\ARM\CMSIS\5.6.0\CMSIS\Core\Include
-  E:\Keil5pack\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+  C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include
+  C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.15.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
 
-   * Component: ARM::CMSIS:CORE:5.3.0
-Build Time Elapsed:  00:00:11
+   * Component: ARM::CMSIS:CORE:5.1.2
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>
